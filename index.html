@@ -3,6 +3,7 @@
 <html>
     <head>
         <title>MiladyCola</title>
+        <link rel="shortcut icon" href="public/cola.gif" width=32px>
         <link 
             rel="stylesheet"
             href="style.css"
@@ -98,13 +99,17 @@
 
                 mint = async(amt) => {
                     console.log('we mintin');
+                    document.getElementById("mint-button").style.display = "block";
+                    document.getElementById("mnt-btn").style.display = "none";
+                    document.getElementById("mint-input").style.display = "none";
+
                     amt = parseInt(document.getElementById("mint-input").value);
                     console.log(amt);
                     if(!accounts[0]){
                         alert('connect your wallet')
                     }
                     if(amt > 24){
-                        alert('This will not work, you can only buy 24 pack at a time')
+                        alert('BTW This will not work, you can only buy 24 pack at a time')
                     }
                     if(milady > 0){
 
@@ -129,11 +134,12 @@
                                     from: accounts[0],
                                     value: value
                                 });
+                                alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
                         } catch (err) {
                             errorTell(err.message);
                         }
                     }
-                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
+                    
                 }
 
             </script>
@@ -176,7 +182,7 @@
                     
                     document.getElementById("progress-bar").style.width = progressPercentage + "%";
                     document.getElementById("progress-text").innerHTML = progressPercentage.toFixed(2) + "% Minted";
-                    
+                    console.log('were making a progress bar')
                 }
                 
             </script>
@@ -279,5 +285,4 @@
         </footer>
         
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/wagmi-web3@2.0.0/dist/wagmi-web3.min.js"></script>
 </html>
