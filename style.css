@@ -96,7 +96,7 @@
 .dropdown:hover .dropitems {
     display:block !important;
     background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(60px);
 }
 .dropitems a:hover {
     background-color: gray;
@@ -125,6 +125,24 @@
   }
   nav ul li {
     margin: 20px;
+  }
+  .progress-bar-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  #progress-bar {
+    width: 0%;
+    height: 20px;
+    background-color: #435f7a;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  #progress-text {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 60px;
+    font-family: gloock;
+    backdrop-filter: blur(30px);
   }
   button {
     font-size: 200%;

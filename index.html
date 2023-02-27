@@ -35,8 +35,9 @@
 
                 async function getProp() {
                     saleOn=await contract.methods.s_saleIsActive().call();
+                    totalSup = await contract.methods.totalSupply().call();
+                    console.log(totalSup,"tokens")
                 }
-                
                 getProp();
 
                 function errorTell(message) {
@@ -66,7 +67,6 @@
                         checkWallet();
                     }
                 }
-
                 checkWallet = async() => {
                     console.log('whats in your wallet');
                     
@@ -92,6 +92,9 @@
                     }
 
                 }
+                function phaseTwoRedeem() {
+                    alert('We are not redeeming right now, I guess we shouldnt have the button up for it but it gives a nice balance dont you think?')
+                }
 
                 mint = async(amt) => {
                     console.log('we mintin');
@@ -100,10 +103,23 @@
                     if(!accounts[0]){
                         alert('connect your wallet')
                     }
+                    if(amt > 24){
+                        alert('This will not work, you can only buy 24 pack at a time')
+                    }
                     if(milady > 0){
 
                     } else if (friend > 0) {
- 
+                        value = amt * 10000000000000000;
+                        try {
+                            await contract.methods
+                                .mintFriend(amt)
+                                .send({
+                                    from: accounts[0],
+                                    value: value
+                                });
+                        } catch (err) {
+                            errorTell(err.message);
+                        }
                     } else {
                         value = amt * 12500000000000000;
                         try {
@@ -117,31 +133,54 @@
                             errorTell(err.message);
                         }
                     }
+                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
                 }
 
-
-
-
-
             </script>
+            
+            <!-- mobile tapping -->
             <script>
                 // Get all dropdown elements
-var dropdowns = document.querySelectorAll('.dropdown');
+                var dropdowns = document.querySelectorAll('.dropdown');
 
-// Loop through each dropdown element
-for (var i = 0; i < dropdowns.length; i++) {
-  // Add a click event listener to toggle the display of the dropdown items
-  dropdowns[i].addEventListener('click', function() {
-    this.classList.toggle('active');
-    var dropitems = this.querySelector('.dropitems');
-    if (dropitems.style.display === 'block') {
-      dropitems.style.display = 'none';
-    } else {
-      dropitems.style.display = 'block';
-    }
-  });
-}
+                // Loop through each dropdown element
+                for (var i = 0; i < dropdowns.length; i++) {
+                // Add a click event listener to toggle the display of the dropdown items
+                dropdowns[i].addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    var dropitems = this.querySelector('.dropitems');
+                    if (dropitems.style.display === 'block') {
+                    dropitems.style.display = 'none';
+                    } else {
+                    dropitems.style.display = 'block';
+                    }
+                });
+                }
+                    
+                
             </script>
+
+            <!-- progress bar -->
+            <script>
+                window.onload = function() {
+                    // Get the total supply information from the contract
+                const totalSupply = 10000;
+                    // Assume that you have a variable called "mintedCount" that tracks the number of tokens that have been minted so far
+                    const mintedCount = totalSup;
+                    //const mintedCount = 1000;
+                    
+                    // Calculate the percentage of minting progress
+                    const progressPercentage = (mintedCount / totalSupply) * 100;
+                    
+                    // Update the progress bar width and text
+                    
+                    document.getElementById("progress-bar").style.width = progressPercentage + "%";
+                    document.getElementById("progress-text").innerHTML = progressPercentage.toFixed(2) + "% Minted";
+                    
+                }
+                
+            </script>
+
     </head>
     <body>
         <div class="help">
@@ -211,19 +250,23 @@ for (var i = 0; i < dropdowns.length; i++) {
                 <h1 id="title9">miladycola</h1>
             </div>
         </div>
-        <div>
-            <h1>Sale is </h1>
-        </div>
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+            <div id="progress-text"></div>
+          </div>
         
             <nav>
+                
                 <ul>
                 <li>
                     <button id="mint-button" onclick="phaseTwoMint()">Mint Bottle</button>
                     <input class="mint-input" id="mint-input"/>
                     <button id="mnt-btn" onclick="mint()">Mint Bottles</button>
                 </li>
-                <li><button id="redeem-button">Redeem Cap</button></li>
+                <li><button id="redeem-button" onclick="phaseTwoRedeem()">Redeem Cap</button></li>
                 </ul>
+                
+ 
             </nav>
         </div>
         <footer>
