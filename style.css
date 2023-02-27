@@ -72,6 +72,10 @@
     margin: 20px;
     font-size: 200%;
 }
+.connect {
+    margin: 30px;
+    float: right;
+}
 .dropdown {
     display:inline-block;
     font-family: gloock;
@@ -85,7 +89,7 @@
 .dropitems a {
     padding: 10px;
 }
-.dropdown:hover .dropdown:active{
+.dropdown:hover .dropdown:focus .dropdown:active {
     background-color: azure;
     cursor:pointer;
 }
@@ -125,6 +129,15 @@
   button {
     font-size: 200%;
     font-family: silkscreen;
+  }
+  #mnt-btn {
+    display: none;
+  }
+  #mint-input {
+    display:none;
+    width: 100px;
+    height: 30px;
+    font-family: gloock;
   }
   .masterframe h1{
     display:inline;

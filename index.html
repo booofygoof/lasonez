@@ -7,6 +7,141 @@
             rel="stylesheet"
             href="style.css"
             >
+            <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
+            <script>
+
+                const web3 = new Web3(Web3.givenProvider); 
+                console.log(web3)
+                var accounts = [];
+                var friend;
+                var milady;
+                var test = true;
+                var saleOn = false;
+
+                                    // The address of the smart contract that will mint the NFT
+                const contractAddress = "0xFac6478a6e9Cece4931b25a7d938c013F4568779";
+                
+                
+
+
+                // The ABI of the smart contract
+                const contractABI = 
+                [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"ApprovalCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"ApprovalQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"BalanceQueryForZeroAddress","type":"error"},{"inputs":[],"name":"InvalidQueryRange","type":"error"},{"inputs":[],"name":"MintERC2309QuantityExceedsLimit","type":"error"},{"inputs":[],"name":"MintToZeroAddress","type":"error"},{"inputs":[],"name":"MintZeroQuantity","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"OwnerQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"OwnershipNotInitializedForExtraData","type":"error"},{"inputs":[],"name":"TransferCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"TransferFromIncorrectOwner","type":"error"},{"inputs":[],"name":"TransferToNonERC721ReceiverImplementer","type":"error"},{"inputs":[],"name":"TransferToZeroAddress","type":"error"},{"inputs":[],"name":"URIQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"fromTokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"toTokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"ConsecutiveTransfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"IPFSURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"MILADYCOLA_PROVENANCE","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bottlePrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bottle","type":"uint256"},{"internalType":"uint256","name":"friend","type":"uint256"}],"name":"changePrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"explicitOwnershipOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenIds","type":"uint256[]"}],"name":"explicitOwnershipsOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"flipSaleState","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"friendPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"holder","type":"address"}],"name":"miladyHolderCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintFriend","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintNew","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"holder","type":"address"}],"name":"monyCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"s_MAXMILADYCOLA","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"s_saleIsActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"baseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"provenanceHash","type":"string"}],"name":"setProvenanceHash","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"tokensOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"stop","type":"uint256"}],"name":"tokensOfOwnerIn","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
+                
+                //const contractPromise = new Promise(function (resolve, reject) 
+                const contract = new web3.eth.Contract(contractABI, contractAddress);
+                
+                console.log('we have a contract');
+
+                async function getProp() {
+                    saleOn=await contract.methods.s_saleIsActive().call();
+                }
+                
+                getProp();
+
+                function errorTell(message) {
+                    alert(`Something went wrong, here is what the chain said when we checked: ${message}`);
+                }
+                // Connect to the MetaMask wallet
+                connectWallet = async() => {
+                    console.log('you clicked connect')
+                    let connected = false;
+                    try {
+                        accounts = await web3.eth.requestAccounts().then()
+                        connected = true;
+                    } catch(err) {
+                        errorTell(err.message);
+                    }   
+                    if(connected){
+                        document.getElementById('connect-button').innerText = 'Connected';
+                        document.getElementById('connect-button').disabled = true;
+
+                        const networkId = await web3.eth.net.getId();
+                        // console.log(networkId);
+                        if (networkId !== 11155111) {
+                        // Show an error message or take other appropriate action
+                        alert('change your network to sepolia')
+                        }
+
+                        checkWallet();
+                    }
+                }
+
+                checkWallet = async() => {
+                    console.log('whats in your wallet');
+                    
+                    try {
+                        friend = await contract.methods
+                        .tokensOfOwner(accounts[0]).call();
+                        //this needs to be milady and friend check respectively
+                        milady = 0;
+                    } catch(err){
+                        console.log(err);
+                        errorTell(err.message);
+                    }
+                    console.log('is we friend? : ', friend.length)
+                }
+
+                function phaseTwoMint() {
+                    if (saleOn){
+                        document.getElementById("mint-button").style.display = "none";
+                        document.getElementById("mnt-btn").style.display = "block";
+                        document.getElementById("mint-input").style.display = "block";
+                    } else {
+                        alert('sale is not active, come back soon')
+                    }
+
+                }
+
+                mint = async(amt) => {
+                    console.log('we mintin');
+                    amt = parseInt(document.getElementById("mint-input").value);
+                    console.log(amt);
+                    if(!accounts[0]){
+                        alert('connect your wallet')
+                    }
+                    if(milady > 0){
+
+                    } else if (friend > 0) {
+ 
+                    } else {
+                        value = amt * 12500000000000000;
+                        try {
+                            await contract.methods
+                                .mintNew(amt)
+                                .send({
+                                    from: accounts[0],
+                                    value: value
+                                });
+                        } catch (err) {
+                            errorTell(err.message);
+                        }
+                    }
+                }
+
+
+
+
+
+            </script>
+            <script>
+                // Get all dropdown elements
+var dropdowns = document.querySelectorAll('.dropdown');
+
+// Loop through each dropdown element
+for (var i = 0; i < dropdowns.length; i++) {
+  // Add a click event listener to toggle the display of the dropdown items
+  dropdowns[i].addEventListener('click', function() {
+    this.classList.toggle('active');
+    var dropitems = this.querySelector('.dropitems');
+    if (dropitems.style.display === 'block') {
+      dropitems.style.display = 'none';
+    } else {
+      dropitems.style.display = 'block';
+    }
+  });
+}
+            </script>
     </head>
     <body>
         <div class="help">
@@ -18,7 +153,7 @@
                             <div class="dropitems">
                                 <p>MiladyCola is a raffle lottery NFT that upon redeeming could get you 1 MIL :O</p>
                                 <p>The MiladyCola bottles come in multiple flavors that nod to loveable milady derivatives</p>
-                                <p>When you open your bottle and redeem it for a cap, you are interacting with a second contract that utilizes chainlink vrf to try and win!</p>
+                                <p>When you drink/burn your bottle nft and redeem it for a cap nft, you are interacting with a second contract that utilizes chainlink vrf to determine our winners!</p>
                                 <p>2/3 of the mint proceeds go towards sweeping MILx on NFTX for our winners, the rest goes to purchasing 5,000LINK for the vrf work and compensating the artist and developer</p>
                                 <p>The odds of winning will depend on how much MILx we can acquire with the mint proceeds. Once 2/3 of the mint has gone, the odds will be calculated</p>
                             </div>
@@ -28,9 +163,9 @@
                         <div class="dropdown">
                         Contracts
                             <div class="dropitems">
-                                <p>MiladyCola NFT Contract <a>view on etherscan</a></p>
-                                <p>MiladyCola Cap NFT Contract <a>view on etherscan</a></p>
-                                <p>MiladyCola Raffle NFT Contract <a>view on etherscan</a></p>
+                                <p>MiladyCola Bottle NFT Contract <a>view on etherscan</a></p>
+                                <p>MiladyCola Cap NFT Contract <a>under development</a></p>
+                                <p>MiladyCola Raffle NFT Contract <a>under development</a></p>
                             </div>
                         </div>
                     </li>
@@ -39,11 +174,16 @@
                             Etherscan Tutorial
                                 <div class="dropitems">
                                     <p>If minting from this website is concerning you for the safety of your assets, we encourage you to try minting from the contract</p>
+                                    <p>First head to etherscan on a web3 wallet enabled browser. Go to the bottle nft contract and click the contract tab then write to contract.</p>
+                                    <p></p>
                                     <p></p>
                                 </div>
                         </div>
                     </li>
                 </ul>
+            </div>
+            <div class="connect">
+                <button id="connect-button" onclick="connectWallet()">Connect</button>
             </div>
         </div>
         <div class="landing">
@@ -71,10 +211,17 @@
                 <h1 id="title9">miladycola</h1>
             </div>
         </div>
+        <div>
+            <h1>Sale is </h1>
+        </div>
         
             <nav>
                 <ul>
-                <li><button id="mint-button">Mint Bottle</button></li>
+                <li>
+                    <button id="mint-button" onclick="phaseTwoMint()">Mint Bottle</button>
+                    <input class="mint-input" id="mint-input"/>
+                    <button id="mnt-btn" onclick="mint()">Mint Bottles</button>
+                </li>
                 <li><button id="redeem-button">Redeem Cap</button></li>
                 </ul>
             </nav>
