@@ -9,6 +9,8 @@
             href="style.css"
             >
             <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
+
+            <!-- bottle nft contract -->
             <script>
 
                 const web3 = new Web3(Web3.givenProvider); 
@@ -55,8 +57,10 @@
                         errorTell(err.message);
                     }   
                     if(connected){
-                        document.getElementById('connect-button').innerText = 'Connected';
-                        document.getElementById('connect-button').disabled = true;
+                        var connectbutt = document.getElementById('connect-button');
+                        connectbutt.innerText = 'Connected';
+                        connectbutt.disabled = true;
+                        connectbutt.style.fontSize = "20px";
 
                         const networkId = await web3.eth.net.getId();
                         // console.log(networkId);
@@ -111,6 +115,10 @@
                     if(amt > 24){
                         alert('BTW This will not work, you can only buy 24 pack at a time')
                     }
+                    var mintbutt = document.getElementById('mnt-btn');
+                        mintbutt.innerText = 'Minting';
+                        mintbutt.disabled = true;
+                        
                     if(milady > 0){
 
                     } else if (friend > 0) {
@@ -138,6 +146,8 @@
                         } catch (err) {
                             errorTell(err.message);
                         }
+                        mintbutt.innerText = 'Mint Bottles';
+                        mintbutt.disabled = false;
                     }
                     
                 }
@@ -166,26 +176,7 @@
                 
             </script>
 
-            <!-- progress bar -->
-            <script>
-                window.onload = function() {
-                    // Get the total supply information from the contract
-                const totalSupply = 10000;
-                    // Assume that you have a variable called "mintedCount" that tracks the number of tokens that have been minted so far
-                    const mintedCount = totalSup;
-                    //const mintedCount = 1000;
-                    
-                    // Calculate the percentage of minting progress
-                    const progressPercentage = (mintedCount / totalSupply) * 100;
-                    
-                    // Update the progress bar width and text
-                    
-                    document.getElementById("progress-bar").style.width = progressPercentage + "%";
-                    document.getElementById("progress-text").innerHTML = progressPercentage.toFixed(2) + "% Minted";
-                    console.log('were making a progress bar')
-                }
-                
-            </script>
+
 
     </head>
     <body>
@@ -285,4 +276,24 @@
         </footer>
         
     </body>
+                <!-- progress bar -->
+                <script>
+                    window.onload = function() {
+                        // Get the total supply information from the contract
+                    const totalSupply = 10000;
+                        // Assume that you have a variable called "mintedCount" that tracks the number of tokens that have been minted so far
+                        const mintedCount = totalSup;
+                        //const mintedCount = 1000;
+                        
+                        // Calculate the percentage of minting progress
+                        const progressPercentage = (mintedCount / totalSupply) * 100;
+                        
+                        // Update the progress bar width and text
+                        
+                        document.getElementById("progress-bar").style.width = progressPercentage + "%";
+                        document.getElementById("progress-text").innerHTML = progressPercentage.toFixed(2) + "% Minted";
+                        console.log('were making a progress bar')
+                    }
+                    
+                </script>
 </html>
