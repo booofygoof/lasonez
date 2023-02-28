@@ -101,6 +101,12 @@
 .dropitems a:hover {
     background-color: gray;
 }
+
+audio {
+    position: absolute;
+    top: 33%;
+    left: 38%;
+}
   
 nav {
     display: flex;
@@ -115,6 +121,7 @@ nav {
     transform: translate(-50%, -50%);
     border-radius: 10px;
     width: 60%;
+    margin:10px;
   }
   nav ul {
     list-style-type: none;
