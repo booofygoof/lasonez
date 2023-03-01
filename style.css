@@ -36,13 +36,16 @@
     font-family: silkscreen;
 }
 
-
+body {
+    background-color: lightgray;
+}
   
   .landing {
     background-image: url('public/vend.svg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
+    mix-blend-mode:color-dodge;
     height: 80vh;
   }
 
