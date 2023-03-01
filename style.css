@@ -45,7 +45,7 @@ body {
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
-    mix-blend-mode:color-dodge;
+    mix-blend-mode:multiply;
     height: 80vh;
   }
 

@@ -40,9 +40,9 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "../erc721a/contracts/ERC721A.sol";
 import "../erc721a/contracts/extensions/ERC721ABurnable.sol";
 import "../erc721a/contracts/extensions/ERC721AQueryable.sol";
-import "../solady/auth/Ownable.sol";
+import "../Solady/src/auth/Ownable.sol";
 
-contract MiladyColaTest is ERC721A, ERC721AQueryable, ERC721ABurnable, Ownable {
+contract MiladyCola is ERC721A, ERC721AQueryable, ERC721ABurnable, Ownable {
 
     uint256 public constant s_MAXMILADYCOLA = 10000;
 
@@ -59,13 +59,14 @@ contract MiladyColaTest is ERC721A, ERC721AQueryable, ERC721ABurnable, Ownable {
     address internal constant miaura = 0x2fC722C1c77170A61F17962CC4D039692f033b43;
 
     address internal constant cig = 0xEEd41d06AE195CA8f5CaCACE4cd691EE75F0683f;
+    
 
     uint256 public bottlePrice;
     uint256 public friendPrice;
     uint256 public bulkPrice;
 
-    constructor() ERC721A("MiladyColaTest", "MCT") {
-        _initializeOwner(0xFfDAe607cd28f6Db1303eC333Aa37A13E01f78Dd);
+    constructor() ERC721A("MiladyCola", "MC") {
+        _initializeOwner(msg.sender);
         bottlePrice = 12500000000000000;
         friendPrice = 10000000000000000;
         bulkPrice = 11000000000000000;
@@ -91,7 +92,7 @@ contract MiladyColaTest is ERC721A, ERC721AQueryable, ERC721ABurnable, Ownable {
     }
 
     // MiladyCola Friend check for frontend
-    function miladyHolderCheck(address holder) public view returns (uint256) {
+    function friendCheck(address holder) public view returns (uint256) {
         uint256 tokenNum;
         try ERC721(milady).balanceOf(holder) returns (uint256 miladyHolderIndex) {
             tokenNum = miladyHolderIndex;
@@ -141,18 +142,21 @@ contract MiladyColaTest is ERC721A, ERC721AQueryable, ERC721ABurnable, Ownable {
 
     function mintNew(uint256 numberOfTokens) public payable {
         require(s_saleIsActive, "Sale must be active to mint");
-        require(totalSupply() + numberOfTokens < s_MAXMILADYCOLA, "Purchase would exceed max supply");
-        require(numberOfTokens < 25, "one 24 pack at a time");
-        require(bottlePrice*(numberOfTokens) <= msg.value, "Ether value sent is not correct");
-        
+        require(totalSupply() + numberOfTokens < s_MAXMILADYCOLA+1, "Purchase would exceed max supply");
+        require(numberOfTokens < 48, "one 48 pack at a time");
+        if (numberOfTokens < 10) {
+            require(bottlePrice*(numberOfTokens) <= msg.value, "Ether value sent is not correct");
+        } else {
+            require(bulkPrice*(numberOfTokens) <= msg.value, "Ether value sent is not correct");
+        }
         _safeMint(msg.sender, numberOfTokens);
     }
 
     function mintFriend(uint256 numberOfTokens) public payable miladyFriends {
         uint256 sup = totalSupply();
         require(s_saleIsActive, "Sale must be active to mint");
-        require(sup + numberOfTokens < s_MAXMILADYCOLA, "Purchase would exceed max supply");
-        require(numberOfTokens < 25, "one 24 pack at a time");
+        require(sup + numberOfTokens < s_MAXMILADYCOLA+1, "Purchase would exceed max supply");
+        require(numberOfTokens < 48, "one 48 pack at a time");
         require(friendPrice*(numberOfTokens) <= msg.value, "Ether value sent is not correct");
         if (sup < 349) {
             numberOfTokens = numberOfTokens + 1;
