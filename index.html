@@ -17,13 +17,12 @@
                 console.log(web3)
                 var accounts = [];
                 var friend;
-                var milady;
                 var totalSup;
                 var test = true;
                 var saleOn = false;
 
                                     // The address of the smart contract that will mint the NFT
-                const contractAddress = "0xFac6478a6e9Cece4931b25a7d938c013F4568779";
+                const contractAddress = "0xE0c839D60F15dD0B939e93d9eeaB5ecDA9AffE57";
                 
                 
 
@@ -65,9 +64,9 @@
 
                         const networkId = await web3.eth.net.getId();
                         // console.log(networkId);
-                        if (networkId !== 11155111) {
+                        if (networkId !== 1) {
                         // Show an error message or take other appropriate action
-                        alert('change your network to sepolia')
+                        alert('change your network to eth main')
                         }
 
                         checkWallet();
@@ -78,14 +77,13 @@
                     
                     try {
                         friend = await contract.methods
-                        .tokensOfOwner(accounts[0]).call();
+                        .friendCheck(accounts[0]).call();
                         //this needs to be milady and friend check respectively
-                        milady = 0;
                     } catch(err){
                         console.log(err);
                         errorTell(err.message);
                     }
-                    console.log('is we friend? : ', friend.length)
+                    console.log('is we friend? : ', friend)
                 }
 
                 function phaseTwoMint() {
