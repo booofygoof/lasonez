@@ -85,7 +85,8 @@ body {
 }
 .dropitems {
     display:none;
-    position: absolute;
+    position:absolute;
+    left: 10%;
     z-index: 1;
     padding: 20px;
 }
@@ -106,9 +107,9 @@ body {
 }
 
 audio {
-    position: absolute;
+    /* position: absolute;
     top: 33%;
-    left: 38%;
+    left: 38%; */
 }
   
 nav {
@@ -123,7 +124,7 @@ nav {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    width: 60%;
+    width: 75%;
     margin:10px;
   }
   nav ul {

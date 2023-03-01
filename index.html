@@ -24,8 +24,6 @@
                                     // The address of the smart contract that will mint the NFT
                 const contractAddress = "0xE0c839D60F15dD0B939e93d9eeaB5ecDA9AffE57";
                 
-                
-
 
                 // The ABI of the smart contract
                 const contractABI = 
@@ -118,9 +116,7 @@
                         mintbutt.innerText = 'Minting';
                         mintbutt.disabled = true;
                         
-                    if(milady > 0){
-
-                    } else if (friend > 0) {
+                    if (friend > 0) {
                         value = amt * 10000000000000000;
                         try {
                             await contract.methods
@@ -133,20 +129,38 @@
                             errorTell(err.message);
                         }
                     } else {
-                        value = amt * 12500000000000000;
-                        try {
-                            await contract.methods
-                                .mintNew(amt)
-                                .send({
-                                    from: accounts[0],
-                                    value: value
-                                });
-                                alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
-                        } catch (err) {
-                            errorTell(err.message);
+                        if(amt < 10) {
+                            value = amt * 12500000000000000;
+                            try {
+                                await contract.methods
+                                    .mintNew(amt)
+                                    .send({
+                                        from: accounts[0],
+                                        value: value
+                                    });
+                                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
+                            } catch (err) {
+                                errorTell(err.message);
+                            }
+                            mintbutt.innerText = 'Mint Bottles';
+                            mintbutt.disabled = false;
+                        } else {
+                            value = amt * 11000000000000000;
+                            try {
+                                await contract.methods
+                                    .mintNew(amt)
+                                    .send({
+                                        from: accounts[0],
+                                        value: value
+                                    });
+                                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
+                            } catch (err) {
+                                errorTell(err.message);
+                            }
+                            mintbutt.innerText = 'Mint Bottles';
+                            mintbutt.disabled = false;
                         }
-                        mintbutt.innerText = 'Mint Bottles';
-                        mintbutt.disabled = false;
+                        
                     }
                     
                 }
@@ -222,7 +236,7 @@
                             FAQ
                             <div class="dropitems">
                                 <h3>How much are they?</h3>
-                                <p>.0125 a pop (.011 in batches greater than 10) or .01 for milady and friends</p>
+                                <p>.0125 a pop (.011 in batches greater than 10) or .01 for milady and friends (remilio,cigawrette,milady aura,miladystation)</p>
                                 <p>omg and the first 349 friends get a freebie</p>
                                 <h3>What are the odds</h3>
                                 <p>The odds will be calculated after 2/3 of the bottles are minted</p>
@@ -273,20 +287,22 @@
             <nav>
                 
                 <ul>
-                <li>
-                    <button id="mint-button" onclick="phaseTwoMint()">MiladyCola</button>
-                    <input class="mint-input" id="mint-input"/>
-                    <button id="mnt-btn" onclick="mint()">Mint Bottle(s)</button>
-                </li>
+                    <li>
+                        <button id="mint-button" onclick="phaseTwoMint()">MiladyCola</button>
+                        <input class="mint-input" id="mint-input"/>
+                        <button id="mnt-btn" onclick="mint()">Mint Bottle(s)</button>
+                    </li>
                 <!-- <li><button id="redeem-button" onclick="phaseTwoRedeem()" display="none">Redeem Cap</button></li> -->
+                    <li>            
+                        <audio controls autoplay loop>
+                            <source src="public/ColaSong.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </li>
                 </ul>
                 
  
             </nav>
-            <audio controls autoplay>
-                <source src="public/ColaSong.wav" type="audio/wav">
-              Your browser does not support the audio element.
-              </audio>
         </div>
         <footer>
             <img src="public/sodapopinski.gif"/>
