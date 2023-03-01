@@ -14,7 +14,6 @@
             <script>
 
                 const web3 = new Web3(Web3.givenProvider); 
-                console.log(web3)
                 var accounts = [];
                 var friend;
                 var totalSup;
@@ -32,7 +31,6 @@
                 //const contractPromise = new Promise(function (resolve, reject) 
                 const contract = new web3.eth.Contract(contractABI, contractAddress);
                 
-                console.log('we have a contract');
 
                 async function getProp() {
                     saleOn=await contract.methods.s_saleIsActive().call();
@@ -46,7 +44,6 @@
                 }
                 // Connect to the MetaMask wallet
                 connectWallet = async() => {
-                    console.log('you clicked connect')
                     let connected = false;
                     try {
                         accounts = await web3.eth.requestAccounts().then()
@@ -61,7 +58,6 @@
                         connectbutt.style.fontSize = "20px";
 
                         const networkId = await web3.eth.net.getId();
-                        // console.log(networkId);
                         if (networkId !== 1) {
                         // Show an error message or take other appropriate action
                         alert('change your network to eth main')
@@ -72,13 +68,11 @@
                 }
                 checkWallet = async() => {
                     console.log('whats in your wallet');
-                    
                     try {
                         friend = await contract.methods
                         .friendCheck(accounts[0]).call();
                         //this needs to be milady and friend check respectively
                     } catch(err){
-                        console.log(err);
                         errorTell(err.message);
                     }
                     console.log('is we friend? : ', friend)
@@ -99,13 +93,11 @@
                 }
 
                 mint = async(amt) => {
-                    console.log('we mintin');
                     document.getElementById("mint-button").style.display = "block";
                     document.getElementById("mnt-btn").style.display = "none";
                     document.getElementById("mint-input").style.display = "none";
 
                     amt = parseInt(document.getElementById("mint-input").value);
-                    console.log(amt);
                     if(!accounts[0]){
                         alert('connect your wallet')
                     }

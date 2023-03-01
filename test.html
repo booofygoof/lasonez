@@ -120,9 +120,7 @@
                         mintbutt.innerText = 'Minting';
                         mintbutt.disabled = true;
                         
-                    if(milady > 0){
-
-                    } else if (friend > 0) {
+                    if (friend > 0) {
                         value = amt * 10000000000000000;
                         try {
                             await contract.methods
@@ -135,20 +133,38 @@
                             errorTell(err.message);
                         }
                     } else {
-                        value = amt * 12500000000000000;
-                        try {
-                            await contract.methods
-                                .mintNew(amt)
-                                .send({
-                                    from: accounts[0],
-                                    value: value
-                                });
-                                alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
-                        } catch (err) {
-                            errorTell(err.message);
+                        if(amt < 10) {
+                            value = amt * 12500000000000000;
+                            try {
+                                await contract.methods
+                                    .mintNew(amt)
+                                    .send({
+                                        from: accounts[0],
+                                        value: value
+                                    });
+                                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
+                            } catch (err) {
+                                errorTell(err.message);
+                            }
+                            mintbutt.innerText = 'Mint Bottles';
+                            mintbutt.disabled = false;
+                        } else {
+                            value = amt * 11000000000000000;
+                            try {
+                                await contract.methods
+                                    .mintNew(amt)
+                                    .send({
+                                        from: accounts[0],
+                                        value: value
+                                    });
+                                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! We aren't redeeming for raffles yet but keep an eye out and hold on to them tight until then, they could be winners!!`)
+                            } catch (err) {
+                                errorTell(err.message);
+                            }
+                            mintbutt.innerText = 'Mint Bottles';
+                            mintbutt.disabled = false;
                         }
-                        mintbutt.innerText = 'Mint Bottles';
-                        mintbutt.disabled = false;
+                        
                     }
                     
                 }
