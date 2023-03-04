@@ -17,13 +17,14 @@
                 console.log(web3)
                 var accounts = [];
                 var friend;
-                var milady;
+                var thirster;
                 var totalSup;
                 var test = true;
                 var saleOn = false;
 
                                     // The address of the smart contract that will mint the NFT
                 const contractAddress = "0xFac6478a6e9Cece4931b25a7d938c013F4568779";
+                const icolaAddress = "0x56519A28aB2DE12AC7d6040f1f06871d08C1886b";
                 
                 
 
@@ -80,7 +81,6 @@
                         friend = await contract.methods
                         .tokensOfOwner(accounts[0]).call();
                         //this needs to be milady and friend check respectively
-                        milady = 0;
                     } catch(err){
                         console.log(err);
                         errorTell(err.message);
@@ -100,6 +100,22 @@
                 }
                 function phaseTwoRedeem() {
                     alert('We are not redeeming right now, I guess we shouldnt have the button up for it but it gives a nice balance dont you think?')
+                }
+
+                setApprove = async() => {
+                    console.log('yea approve that shit');
+                    try {
+                        await contract.methods
+                        .setApprovalForAll(
+                            icolaAddress,
+                            true
+                        )
+                        .send({
+                                from: accounts[0]
+                            });
+                    } catch (err) {
+                        errorTell(err.message);
+                    }
                 }
 
                 mint = async(amt) => {
@@ -301,6 +317,9 @@
                 
  
             </nav>
+            <div>
+                <button onclick="setApprove()">Approve</button>
+            </div>
             <audio controls autoplay>
                 <source src="public/ColaSong.wav" type="audio/wav">
               Your browser does not support the audio element.

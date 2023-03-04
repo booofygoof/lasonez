@@ -40,7 +40,7 @@
                 getProp();
 
                 function errorTell(message) {
-                    alert(`Something went wrong, here is what the chain said when we checked: ${message}`);
+                    alert(`Something went wrong, here is what the chain said when we checked: ${message} go dm miladystation for help`);
                 }
                 // Connect to the MetaMask wallet
                 connectWallet = async() => {
@@ -101,8 +101,8 @@
                     if(!accounts[0]){
                         alert('connect your wallet')
                     }
-                    if(amt > 24){
-                        alert('BTW This will not work, you can only buy 24 pack at a time')
+                    if(amt > 48){
+                        alert('BTW This will not work, you can only buy 48 pack at a time')
                     }
                     var mintbutt = document.getElementById('mint-button');
                         mintbutt.innerText = 'Minting';
@@ -198,7 +198,7 @@
                                 <p>It only takes 1 MiladyCola and a little bit of luck to WIN</p>
                                 <p>2/3 of the mint proceeds go towards sweeping MILx on NFTX for our winners, the rest goes to purchasing 5,000LINK for the vrf work as well as compensating the artist and developer</p>
                                 <p>The odds of winning will depend on how much MILx we can acquire with the mint proceeds. Once 2/3 of the mint has gone, the odds will be calculated</p>
-                                <p>Winners will have 1.03 MILx automatically deposited into their wallet for a random redeem from the NFTX vault!</p>
+                                <p>Winners will have 1.02 MILx automatically deposited into their wallet for a random redeem from the NFTX vault!</p>
                             </div>
                         </div>
                     </li>
@@ -209,6 +209,7 @@
                                 <p>MiladyCola Bottle NFT Contract <a href="https://etherscan.io/address/0xe0c839d60f15dd0b939e93d9eeab5ecda9affe57#code">view on etherscan</a></p>
                                 <p>MiladyCola Cap NFT Contract <a>under development (dm miladystation)</a></p>
                                 <p>MiladyCola Raffle NFT Contract <a>under development</a></p>
+                                <p>Admin Wallet <a href="https://etherscan.io/address/0xFfDAe607cd28f6Db1303eC333Aa37A13E01f78Dd">view on etherscan</a></p>
                             </div>
                         </div>
                     </li>
