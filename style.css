@@ -97,19 +97,13 @@ body {
     background-color: azure;
     cursor:pointer;
 }
-.dropdown:hover .dropitems {
+.dropdown:hover .dropdown:active .dropitems {
     display:block !important;
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(60px);
 }
 .dropitems a:hover {
     background-color: gray;
-}
-
-audio {
-    /* position: absolute;
-    top: 33%;
-    left: 38%; */
 }
   
 nav {
