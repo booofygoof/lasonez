@@ -97,13 +97,19 @@ body {
     background-color: azure;
     cursor:pointer;
 }
-.dropdown:hover .dropdown:active .dropitems {
+.dropdown:hover .dropitems {
     display:block !important;
     background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(60px);
 }
 .dropitems a:hover {
     background-color: gray;
+}
+
+audio {
+    /* position: absolute;
+    top: 33%;
+    left: 38%; */
 }
   
 nav {
@@ -162,6 +168,12 @@ nav {
     height: 60px;
     font-family: gloock;
     font-size: 40px;
+  }
+  #redeem-button{
+  
+  }
+  #pop {
+    display:none;
   }
   .masterframe h1{
     display:inline;
