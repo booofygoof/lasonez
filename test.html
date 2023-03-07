@@ -24,7 +24,7 @@
 
                                     // The address of the smart contract that will mint the NFT
                 const bottleAddress = "0xFac6478a6e9Cece4931b25a7d938c013F4568779";
-                const icolaAddress = "0x839CA235CfD82D5f1a3acc4766d5d44282043080";
+                const icolaAddress = "0x8a8a1b7Fd9204d307982d610c92B2227961d3d33";
                 const capAddress = "0x685B18abDC4053F4680D60E4f0A351e366cA8c3B";
 
                 // The ABI of the smart contract
@@ -46,6 +46,7 @@
                     totalSup = await bottle.methods.totalSupply().call();
                     totalBurn = await cap.methods.totalSupply().call();
                     odds = await icola.methods.odds().call();
+                    mil = await icola.methods.checkMIL().call();
                     console.log(totalSup,"tokens")
                 }
                 getProp();
@@ -53,7 +54,14 @@
                 function errorTell(message) {
                     alert(`Something went wrong, here is what the chain said when we checked: ${message}`);
                 }
-                
+                function hide(id) {
+                    let el = document.getElementById(id);
+                    el.style.display = "none";
+                }
+                function show(id) {
+                    let el = document.getElementById(id);
+                    el.style.display = "block";
+                }
                 // Connect to the MetaMask wallet
                 connectWallet = async() => {
                     console.log('you clicked connect')
@@ -95,26 +103,29 @@
 
                 function phaseTwoMint() {
                     if (saleOn || test){
-                        document.getElementById("mint-button").style.display = "none";
-                        document.getElementById("mnt-btn").style.display = "block";
-                        document.getElementById("mint-input").style.display = "block";
+                        hide("mint-button");
+                        show("mnt-btn");
+                        show("mint-input");
                     } else {
                         alert('sale is not active, come back soon')
                     }
 
                 }
                 phaseTwoRedeem = async () => {
-                   document.getElementById("redeem-button").style.display = "none";
-                   document.getElementById("pop").style.display = "block";
+                   //document.getElementById("redeem-button").style.display = "none";
+                   hide("redeem-button");
+                   //document.getElementById("pop").style.display = "block";
+                   show("pop");
                    
                    var playerBottles = await bottle.methods.tokensOfOwner(accounts[0]).call();
                    var bottleList = document.getElementById("bottleList");
-                   for (bottles in playBottles) {
+                   for (bottles in playerBottles) {
                     let li = document.createElement("li");
                     li.appendChild(document.createTextNode(bottles));
                     // li.setAttribute()
                     bottleList.appendChild(li);
                    }
+                   show("bottleList");
                 }
 
                 setApprove = async() => {
@@ -199,7 +210,11 @@
                     
                     
                 }
-
+                pop = async(list) => {
+                    document.getElementById("redeem-button").style.display = "block";
+                    document.getElementById("pop").style.display = "none";
+                    document.getElementById("bottleList").style.display = "none";
+                }
             </script>
             
             <!-- mobile tapping -->
