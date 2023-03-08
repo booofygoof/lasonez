@@ -185,6 +185,7 @@
                 }
                 
                 //contract interaction
+                //mint bottles
                 mint = async(amt) => {
                     console.log('we mintin');
                     document.getElementById("mint-button").style.display = "block";
@@ -251,14 +252,12 @@
                     
                     
                 }
+                //pop bottles
                 pop = async(list) => {
-                    // document.getElementById("redeem-button").style.display = "block";
-                    // document.getElementById("pop").style.display = "none";
-                    // document.getElementById("bottleList").style.display = "none";
                     show("redeem-button");
                     hide("pop");
                     hide("bottleList");
-                    list = `[${targets}]`;
+                    list = `${targets}`;
                     console.log(list);
                     try {
                         await icola.methods
@@ -267,6 +266,7 @@
                             value: 0
                         });
                     } catch(err) {
+                        console.log(err)
                         errorTell(err.message);
                     }
                     list = "";
