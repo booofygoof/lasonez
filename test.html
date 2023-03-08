@@ -21,7 +21,7 @@
                 var thirster;
                 var totalSup;
                 var targets = "";
-                var test = false;
+                var test = true;
                 var saleOn = true;
 
                                     // The address of the smart contract that will mint the NFT
@@ -101,7 +101,7 @@
                         console.log(err);
                         errorTell(err.message);
                     }
-                    console.log('is we friend? : ', friend.length)
+                    //console.log('is we friend? : ', friend.length)
                     try {
                         approve = await bottle.methods
                         .isApprovedForAll(accounts[0],icolaAddress);
@@ -109,6 +109,7 @@
                         console.log(err);
                         errorTell(err.message)
                     }
+                    console.log('is we approved',approve)
                 }
                 
                 //primer
@@ -158,6 +159,7 @@
                     let bott = document.getElementById(`bottle-${token}`)
                     // bott.setAttribute("class","clicked");
                     // bott.removeAttribute("class","bottle");
+                    bott.removeAttribute("onclick",`listEff(${token})`)
                     bott.style.fontFamily="rubikburned";
                 }
                 setApprove = async() => {
@@ -258,7 +260,6 @@
                     hide("bottleList");
                     list = `[${targets}]`;
                     console.log(list);
-
                     try {
                         await icola.methods
                         .bottlePop(list).send({

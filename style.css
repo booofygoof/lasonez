@@ -39,15 +39,14 @@
 body {
     background-color: lightgray;
 }
-  
-  .landing {
+.landing {
     background-image: url('public/vend.svg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
     mix-blend-mode:multiply;
     height: 80vh;
-  }
+}
 
   @media only screen and (max-width: 480px) {
     body {
@@ -105,12 +104,6 @@ body {
 .dropitems a:hover {
     background-color: gray;
 }
-
-audio {
-    /* position: absolute;
-    top: 33%;
-    left: 38%; */
-}
   
 nav {
     display: flex;
@@ -159,6 +152,9 @@ nav {
     font-size: 200%;
     font-family: silkscreen;
   }
+  #redeem-button{
+    display: block;
+  }
   #mnt-btn {
     display: none;
   }
@@ -169,20 +165,25 @@ nav {
     font-family: gloock;
     font-size: 40px;
   }
-  #redeem-button{
-  
-  }
   #approve-button{
     display: none;
   }
+  #pop {
+    display: none;
+  }
+  /* #bottleList ul li:hover {
+    cursor: pointer;
+    background-color: pink;
+  } */
   .bottle {
     font-family: gloock;
   }
+  .bottle:hover {
+    cursor: pointer;
+    background-color: pink;
+  }
   li .clicked{
     font-family: rubikburned;
-  }
-  #pop {
-    display:none;
   }
   .masterframe h1{
     display:inline;
@@ -223,8 +224,6 @@ nav {
     font-family: silkscreen;
     font-size: 100px;
   }
-
-
   footer {
     position:absolute;
     bottom:0;
