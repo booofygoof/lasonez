@@ -143,13 +143,22 @@
                    
 
                    var bottleList = document.getElementById("bottleList");
+                   let i = 0;
                    for (bot in playerBottles) {
-                    let li = document.createElement("li");
-                    li.appendChild(document.createTextNode(playerBottles[bot]));
-                    li.setAttribute("class","bottle");
-                    li.setAttribute("onclick",`listEff(${playerBottles[bot]})`);
-                    li.setAttribute("id",`bottle-${playerBottles[bot]}`)
-                    bottleList.appendChild(li);
+                    if (i < 11) {
+                        let li = document.createElement("li");
+                        li.appendChild(document.createTextNode(playerBottles[bot]));
+                        li.setAttribute("class","bottle");
+                        li.setAttribute("onclick",`listEff(${playerBottles[bot]})`);
+                        li.setAttribute("id",`bottle-${playerBottles[bot]}`)
+                        bottleList.appendChild(li);
+                    i++
+                    } else {
+                        let li = document.createElement("li");
+                        li.appendChild(document.createTextNode("..."));
+                        li.setAttribute("class","bottle");
+                        bottleList.appendChild(li);
+                    }
                    }
                    show("bottleList");
                 }
@@ -256,16 +265,16 @@
                     
                 }
                 //pop bottles
-                pop = async(list) => {
+                pop = async() => {
                     show("redeem-button");
                     hide("pop");
                     hide("bottleList");
                     document.getElementById("redeem-button").disabled = true;
-                    list = `${targets}`;
-                    console.log(list);
+                    //var list = `${targets}`;
+                    console.log(targets);
                     try {
                         await icola.methods
-                        .bottlePop(list).send({
+                        .bottlePop(targets).send({
                             from: accounts[0],
                             value: 0
                         });
