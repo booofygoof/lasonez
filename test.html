@@ -127,6 +127,9 @@
                 }
                 phaseTwoRedeem = async () => {
                     var playerBottles
+                    if(!accounts[0]){
+                        alert('connect your wallet')
+                    }
                     if (!approve) {
                         hide("redeem-button")
                         show("approve-button")
@@ -284,6 +287,7 @@
                         errorTell(err.message);
                     }
                     document.getElementById("redeem-button").disabled = false;
+                    document.getElementById("bottleList").innerHTML = "";
                     targets = [];
                     
                 }
