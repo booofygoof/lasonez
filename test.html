@@ -21,7 +21,7 @@
                 var thirster;
                 var totalSup;
                 var targets = [];
-                var test =false;
+                var test =true;
                 var saleOn = true;
 
                                     // Test
@@ -42,12 +42,16 @@
                 const cap = new web3.eth.Contract(capContractABI, capAddress);
 
                 async function getProp() {
+                    
                     saleOn=await bottle.methods.s_saleIsActive().call();
                     totalSup = await bottle.methods.totalSupply().call();
                     totalBurn = await cap.methods.totalSupply().call();
                     odds = await icola.methods.odds().call();
                     mil = await icola.methods.checkMIL().call();
+
                     console.log(totalSup,"tokens")
+                    console.log(odds)
+                    document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
                 }
                 getProp();
 
@@ -296,25 +300,7 @@
 
             </script>
             
-            <!-- mobile tapping -->
-            <script>
-                // Get all dropdown elements
-                var dropdowns = document.querySelectorAll('.dropdown');
 
-                // Loop through each dropdown element
-                for (var i = 0; i < dropdowns.length; i++) {
-                // Add a click event listener to toggle the display of the dropdown items
-                dropdowns[i].addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    var dropitems = this.querySelector('.dropitems');
-                    if (dropitems.style.display === 'block') {
-                    dropitems.style.display = 'none';
-                    } else {
-                    dropitems.style.display = 'block';
-                    }
-                });
-                }
-            </script>
 
 
 
@@ -326,13 +312,13 @@
                     <li>
                         <div class="dropdown">
                         About
-                            <div class="dropitems">
+                            <div id="aboutdrop" class="dropitems">
                                 <p>MiladyCola is a raffle lottery NFT that you can burn for a chance to win 1 Milady!</p>
                                 <p>The MiladyCola bottles come in multiple flavors that nod to loveable milady derivatives</p>
                                 <p>When you drink/burn your bottle nft and redeem it for a cap nft, you are interacting with a second contract that utilizes chainlink vrf to determine our winners!</p>
                                 <p>It only takes 1 MiladyCola and a little bit of luck to WIN</p>
-                                <p>2/3 of the mint proceeds go towards sweeping MILx on NFTX for our winners, the rest goes to purchasing 5,000LINK for the vrf work as well as compensating the artist and developer</p>
-                                <p>The odds of winning will depend on how much MILx we can acquire with the mint proceeds. Once 2/3 of the mint has gone, the odds will be calculated</p>
+                                <p>2/3 of the mint proceeds go towards sweeping MILx on NFTX for our winners, the rest goes to purchasing 2,500LINK for the vrf work as well as compensating the artist and developer</p>
+                                <p>The odds of winning will depend on how much MILx we can acquire with the mint proceeds. Once we get enough milady and link we will calculate odds</p>
                                 <p>Winners will have 1.02 MILx automatically deposited into their wallet for a random redeem from the NFTX vault!</p>
                             </div>
                         </div>
@@ -340,7 +326,7 @@
                     <li>
                         <div class="dropdown">
                         Contracts
-                            <div class="dropitems">
+                            <div id="contractdrop" class="dropitems">
                                 <p>MiladyCola Bottle NFT Contract <a href="https://sepolia.etherscan.io/address/0xfac6478a6e9cece4931b25a7d938c013f4568779#code">view on etherscan</a></p>
                                 <p>MiladyCola Cap NFT Contract <a href="https://sepolia.etherscan.io/address/0x685b18abdc4053f4680d60e4f0a351e366ca8c3b#code">view on etherscan</a></p>
                                 <p>MiladyCola Raffle NFT Contract <a href="https://sepolia.etherscan.io/address/0x8a8a1b7fd9204d307982d610c92b2227961d3d33#code">view on etherscan</a></p>
@@ -350,7 +336,7 @@
                     <li>
                         <div class="dropdown">
                             Tutorial
-                                <div class="dropitems">
+                                <div id="contractdrop" class="dropitems">
                                     <p>First you need some bottles. Connect your wallet in the top right corner and use the miladycola button to open the bottle menu to decide how many bottles to mint.</p>
                                     <p>Next you will need to approve our raffle smart contract to burn your bottles (THEY WILL BE LOST FOREVER), click the redeem cap button to get to the approval transaction and double check the transaction that it only asks for your bottles</p>
                                     <p>After you've approved your bottles, you are ready to pop em. click the redeem bottles button again and select which bottles you would like to redeem. You can only do up to 10, it is recommended to do batches as large as possible since gas is cheaper that way.</p>
@@ -366,7 +352,7 @@
                     <li>
                         <div class="dropdown">
                             FAQ
-                            <div class="dropitems">
+                            <div id="faqdrop" class="dropitems">
                                 <h3>How much are they?</h3>
                                 <p>.0125 a pop (.011 in batches greater than 10) or .01 for milady and friends (remilio,cigawrette,milady aura,miladystation)</p>
                                 <p>omg and the first 349 friends get a freebie</p>
@@ -379,6 +365,11 @@
                             </div>
                         </div>
                     </li>
+                    <li>
+                        <div class="dropdown close">
+                            x
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="connect">
@@ -388,26 +379,26 @@
         <div class="landing">
         <div class="marquee">
             <div class="marquee__content">
-                <h1 id="title">miladycola</h1>
-                <h1 id="title2">miladycola</h1>
-                <h1 id="title3">miladycola</h1>
-                <h1 id="title4">miladycola</h1>
-                <h1 id="title5">miladycola</h1>
-                <h1 id="title6">miladycola</h1>
-                <h1 id="title7">miladycola</h1>
-                <h1 id="title8">miladycola</h1>
-                <h1 id="title9">miladycola</h1>
+                <h1 id="title">miladycolatest</h1>
+                <h1 id="title2">miladycolatest</h1>
+                <h1 id="title3">miladycolatest</h1>
+                <h1 id="title4">miladycolatest</h1>
+                <h1 id="title5">miladycolatest</h1>
+                <h1 id="title6">miladycolatest</h1>
+                <h1 id="title7">miladycolatest</h1>
+                <h1 id="title8">miladycolatest</h1>
+                <h1 id="title9">miladycolatest</h1>
             </div>
             <div aria-hidden="true" class="marquee__content">
-                <h1 id="title">miladycola</h1>
-                <h1 id="title2">miladycola</h1>
-                <h1 id="title3">miladycola</h1>
-                <h1 id="title4">miladycola</h1>
-                <h1 id="title5">miladycola</h1>
+                <h1 id="title">miladycolatest</h1>
+                <h1 id="title2">miladycolatest</h1>
+                <h1 id="title3">miladycolatest</h1>
+                <h1 id="title4">miladycolatest</h1>
+                <h1 id="title5">miladycolatest</h1>
                 <h1 id="title6">miladycola</h1>
                 <h1 id="title7">miladycola</h1>
-                <h1 id="title8">miladycola</h1>
-                <h1 id="title9">miladycola</h1>
+                <h1 id="title8">miladycolatest</h1>
+                <h1 id="title9">miladycolatest</h1>
             </div>
         </div>
         
@@ -440,6 +431,11 @@
                         </audio>
                     </li>
                 </ul>
+                <div class="oddinfo">
+                    <ul>
+                        <h3 id="odds">Odds are:</h3>
+                    </ul>
+                </div>
                 
  
             </nav>
@@ -478,4 +474,44 @@
                         // document.getElementById("progress-text").innerHTML = progressPercentage.toFixed(2) + "% Minted";
                         // console.log('were making a progress bar')
                 </script>
+
+                            <!-- mobile tapping -->
+            <script>
+                // Get all dropdown elements
+                var dropdowns = document.querySelectorAll('.dropdown');
+                // Loop through each dropdown element
+                for (var i = 0; i < dropdowns.length; i++) {
+                // Add a click event listener to toggle the display of the dropdown items
+                dropdowns[i].addEventListener('click', function() {
+                    
+                    let opens = document.querySelectorAll('.dropitemsee');
+                    
+                    for (let i = 0; i < opens.length; i++){
+                        // console.log(opens[i])
+                        opens[i].removeAttribute("class","dropitemsee");
+                        opens[i].setAttribute("class","dropitems")
+                    }
+
+                    let item = this.children[0];
+                    // console.dir(item.attributes[1].nodeValue)
+
+                    item.removeAttribute("class","dropitems");
+                    item.setAttribute("class","dropitemsee");
+                    
+
+                });
+                }
+
+
+                function dropdownDrop(id) {
+                    el = document.getElementById(id);
+                    el.removeAttribute("class","dropitems");
+                    el.setAttribute("class","dropitemsee");
+                }
+                function dropdownCatch(id) {
+                    el = document.getElementById(id);
+                    el.removeAttribute("class","dropitemsee");
+                    el.setAttribute("class","dropitems");
+                }
+            </script>
 </html>
