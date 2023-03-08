@@ -17,8 +17,10 @@
                 console.log(web3)
                 var accounts = [];
                 var friend;
+                var approve;
                 var thirster;
                 var totalSup;
+                var targets = "";
                 var test = true;
                 var saleOn = false;
 
@@ -38,8 +40,6 @@
                 const bottle = new web3.eth.Contract(bottleContractABI, bottleAddress);
                 const icola = new web3.eth.Contract(icolaContractABI, icolaAddress);
                 const cap = new web3.eth.Contract(capContractABI, capAddress);
-                
-                console.log('we have our contracts');
 
                 async function getProp() {
                     saleOn=await bottle.methods.s_saleIsActive().call();
@@ -51,6 +51,7 @@
                 }
                 getProp();
 
+                //cosmetics
                 function errorTell(message) {
                     alert(`Something went wrong, here is what the chain said when we checked: ${message}`);
                 }
@@ -62,6 +63,8 @@
                     let el = document.getElementById(id);
                     el.style.display = "block";
                 }
+                
+                
                 // Connect to the MetaMask wallet
                 connectWallet = async() => {
                     console.log('you clicked connect')
@@ -88,9 +91,9 @@
                         checkWallet();
                     }
                 }
+                // See if qualify for discount AND if approveAll icola
                 checkWallet = async() => {
                     console.log('whats in your wallet');
-                    
                     try {
                         friend = await bottle.methods
                         .tokensOfOwner(accounts[0]).call();
@@ -99,8 +102,16 @@
                         errorTell(err.message);
                     }
                     console.log('is we friend? : ', friend.length)
+                    try {
+                        approve = await bottle.methods
+                        .isApprovedForAll(accounts[0],icolaAddress);
+                    } catch(err){
+                        console.log(err);
+                        errorTell(err.message)
+                    }
                 }
-
+                
+                //primer
                 function phaseTwoMint() {
                     if (saleOn || test){
                         hide("mint-button");
@@ -112,25 +123,49 @@
 
                 }
                 phaseTwoRedeem = async () => {
+                    var playerBottles
+                    if (!approve) {
+                        hide("redeem-button")
+                        show("approve-button")
+                        return
+                    }
                    //document.getElementById("redeem-button").style.display = "none";
                    hide("redeem-button");
                    //document.getElementById("pop").style.display = "block";
                    show("pop");
                    
-                   var playerBottles = await bottle.methods.tokensOfOwner(accounts[0]).call();
+                   //playerBottles = await bottle.methods.tokensOfOwner(accounts[0]).call();
+                   if (test) {
+                   playerBottles = [304,305,306,307,308,309,310,311,312,313,314,315];
+                   }
                    var bottleList = document.getElementById("bottleList");
-                   for (bottles in playerBottles) {
+                   for (bot in playerBottles) {
                     let li = document.createElement("li");
-                    li.appendChild(document.createTextNode(bottles));
-                    // li.setAttribute()
+                    li.appendChild(document.createTextNode(playerBottles[bot]));
+                    li.setAttribute("class","bottle");
+                    li.setAttribute("onclick",`listEff(${playerBottles[bot]})`);
+                    li.setAttribute("id",`bottle-${playerBottles[bot]}`)
                     bottleList.appendChild(li);
                    }
                    show("bottleList");
                 }
-
+                function listEff(token) {
+                    if (targets == "") {
+                        targets += token;
+                    } else {
+                        targets += `,${token}`
+                    }
+                    let bott = document.getElementById(`bottle-${token}`)
+                    // bott.setAttribute("class","clicked");
+                    // bott.removeAttribute("class","bottle");
+                    bott.style.fontFamily="rubikburned";
+                }
                 setApprove = async() => {
                     console.log('yea approve that shit');
-                    try {
+                    if(test){
+                            approve = true;
+                    } else {
+                        try {
                         await bottle.methods
                         .setApprovalForAll(
                             icolaAddress,
@@ -142,8 +177,12 @@
                     } catch (err) {
                         errorTell(err.message);
                     }
+                    }
+                    hide("approve-button");
+                    show("redeem-button");
                 }
-
+                
+                //contract interaction
                 mint = async(amt) => {
                     console.log('we mintin');
                     document.getElementById("mint-button").style.display = "block";
@@ -211,9 +250,27 @@
                     
                 }
                 pop = async(list) => {
-                    document.getElementById("redeem-button").style.display = "block";
-                    document.getElementById("pop").style.display = "none";
-                    document.getElementById("bottleList").style.display = "none";
+                    // document.getElementById("redeem-button").style.display = "block";
+                    // document.getElementById("pop").style.display = "none";
+                    // document.getElementById("bottleList").style.display = "none";
+                    show("redeem-button");
+                    hide("pop");
+                    hide("bottleList");
+                    list = `[${targets}]`;
+                    console.log(list);
+
+                    try {
+                        await icola.methods
+                        .bottlePop(list).send({
+                            from: accounts[0],
+                            value: 0
+                        });
+                    } catch(err) {
+                        errorTell(err.message);
+                    }
+                    list = "";
+                    targets = "";
+                    
                 }
             </script>
             
@@ -343,11 +400,12 @@
                     </li>
                     <li>
                         <button id="redeem-button" onclick="phaseTwoRedeem()">Redeem Cap</button>
+                        <button id="approve-button" onclick="setApprove()">Approve Bottles</button>
                         <div id="bottleList">
                             <ul>
                             </ul>
                         </div>
-                        <button id="pop" onclick="popBottles()">Pop Bottles</button>
+                        <button id="pop" onclick="pop()">Pop Bottles</button>
                     </li>
                     <li>            
                         <audio controls autoplay loop>

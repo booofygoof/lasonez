@@ -172,6 +172,15 @@ nav {
   #redeem-button{
   
   }
+  #approve-button{
+    display: none;
+  }
+  .bottle {
+    font-family: gloock;
+  }
+  li .clicked{
+    font-family: rubikburned;
+  }
   #pop {
     display:none;
   }
