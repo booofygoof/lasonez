@@ -141,7 +141,6 @@
                     playerBottles = await bottle.methods.tokensOfOwner(accounts[0]).call();
                    }
                    
-
                    var bottleList = document.getElementById("bottleList");
                    let i = 0;
                    for (bot in playerBottles) {
@@ -153,12 +152,14 @@
                         li.setAttribute("id",`bottle-${playerBottles[bot]}`)
                         bottleList.appendChild(li);
                     i++
-                    } else {
+                    } else if (i == 11 ){
                         let li = document.createElement("li");
                         li.appendChild(document.createTextNode("..."));
                         li.setAttribute("class","bottle");
                         bottleList.appendChild(li);
+                    i++
                     }
+                    i = 0;
                    }
                    show("bottleList");
                 }
@@ -288,6 +289,8 @@
                     targets = "";
                     
                 }
+
+
             </script>
             
             <!-- mobile tapping -->
