@@ -94,6 +94,7 @@
                 // See if qualify for discount AND if approveAll icola
                 checkWallet = async() => {
                     console.log('whats in your wallet');
+                    test = false;
                     try {
                         friend = await bottle.methods
                         .tokensOfOwner(accounts[0]).call();
@@ -257,6 +258,7 @@
                     show("redeem-button");
                     hide("pop");
                     hide("bottleList");
+                    document.getElementById("redeem-button").disabled = true;
                     list = `${targets}`;
                     console.log(list);
                     try {
@@ -265,10 +267,12 @@
                             from: accounts[0],
                             value: 0
                         });
+                        alert(`whoa you just popped off bottle ${list} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract`)
                     } catch(err) {
                         console.log(err)
                         errorTell(err.message);
                     }
+                    document.getElementById("redeem-button").disabled = false;
                     list = "";
                     targets = "";
                     
