@@ -260,7 +260,7 @@
                                         from: accounts[0],
                                         value: value
                                     })
-                                    .on('reciept', function(hash){
+                                    .on('transactionHash', function(hash){
                                         popUp('mint',amt,hash)
                                     });
                                     
@@ -305,7 +305,7 @@
                             from: accounts[0],
                             value: 0
                         })
-                        .on('reciept', function(hash){
+                        .on('transactionHash', function(hash){
                             popUp('pop',targets,hash);
                         });
                         
@@ -433,7 +433,7 @@
           </div>
         
             <div id="txinfo" class="popup">
-                <button id="popx">X</button>
+                <button id="popx" onclick="closePop()">X</button>
                 <div class="popupstuff">
                     <h3 id="txtitle">tx title</h3>
                     <p id="txtext">tx info blablablablablablablabalbla</p>
