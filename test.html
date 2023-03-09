@@ -68,7 +68,21 @@
                     let el = document.getElementById(id);
                     el.style.display = "block";
                 }
-                
+                function popUp(f,tokens,tx){
+                    document.getElementById('txinfo').style.display = grid;
+                    let title = document.getElementById('txtitle')
+                    let txt = document.getElementById('txtext')
+                    if(f=='mint'){
+                        title.innerHTML = 'Bottles minted'
+                        txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your tx ${tx}`
+                    } else if(f=='pop'){
+                        title.innerHTML = 'Bottles popped'
+                        txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the transaction ${tx}`
+                    }
+                }
+                function closePop() {
+                    document.getelementById('txinfo').style.display = none;
+                }
                 
                 // Connect to the MetaMask wallet
                 connectWallet = async() => {
@@ -245,8 +259,8 @@
                                         from: accounts[0],
                                         value: value
                                     })
-                                    .on('transactionHash', function(){
-                                        alert(`oh my gosh you just minted ${amt} MiladyCola Bottles! Here's your tx ${hash}`)
+                                    .on('reciept', function(hash){
+                                        popUp('mint',amt,hash)
                                     });
                                     
                             } catch (err) {
@@ -290,8 +304,8 @@
                             from: accounts[0],
                             value: 0
                         })
-                        .on('confirmation', function(number,hash){
-                            alert(`whoa you just popped off bottle ${targets} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the transaction ${hash.transactionHash}`)
+                        .on('reciept', function(hash){
+                            popUp('pop',targets,hash);
                         });
                         
                     } catch(err) {
@@ -417,6 +431,14 @@
             <div id="progress-text"></div>
           </div>
         
+            <div id="txinfo" class="popup">
+                <button id="popx">X</button>
+                <div class="popupstuff">
+                    <h3 id="txtitle">tx title</h3>
+                    <p id="txtext">tx info blablablablablablablabalbla</p>
+                    <img src="public/sodapopinski.gif"/>
+                </div>
+            </div>
             <nav>
                 
                 <ul>
