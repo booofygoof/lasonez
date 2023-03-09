@@ -283,7 +283,6 @@
                     //var list = `${targets}`;
                     console.log(targets);
                     console.dir(targets);
-                    alert('you have to set the gas to aggressive or edit the gas limit, promise')
                     try {
                         await icola.methods
                         .bottlePop(targets)
@@ -291,8 +290,8 @@
                             from: accounts[0],
                             value: 0
                         })
-                        .on('transactionHash', function(hash){
-                            alert(`whoa you just popped off bottle ${targets} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the transaction ${hash}`)
+                        .on('reciept', function(hash){
+                            alert(`whoa you just popped off bottle ${targets} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the transaction ${hash.transactionHash}`)
                         });
                         
                     } catch(err) {
