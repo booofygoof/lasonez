@@ -77,10 +77,10 @@
                     let txt = document.getElementById('txtext')
                     if(f=='mint'){
                         title.innerHTML = 'Bottles minted'
-                        txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your <a> href='${etherscanPre}/${tx}'> tx </a>`
+                        txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your <a href='${etherscanPre}/${tx}'> tx </a>`
                     } else if(f=='pop'){
                         title.innerHTML = 'Bottles popped'
-                        txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the transaction ${tx}`
+                        txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the <a href='${etherscanPre}/${tx}'> tx </a>`
                     }
                 }
                 function closePop() {

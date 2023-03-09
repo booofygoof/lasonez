@@ -61,6 +61,7 @@ body {
   width: 75%;
   margin:10px;
   z-index: 4;
+  overflow: scroll;
 }
 #popx {
   position:relative;
