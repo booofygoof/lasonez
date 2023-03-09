@@ -70,7 +70,8 @@
                 }
                 function popUp(f,tokens,tx){
                     console.log('there should be popup rn')
-                    document.getElementById('txinfo').style.display = grid;
+                    console.log(document.getelementById('txinfo').style)
+                    document.getElementById('txinfo').style.display = 'grid';
                     let title = document.getElementById('txtitle')
                     let txt = document.getElementById('txtext')
                     if(f=='mint'){
