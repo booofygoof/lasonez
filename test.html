@@ -52,6 +52,7 @@
                     console.log(totalSup,"tokens")
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
+                    document.getElementById("bottlesBurned").innerHTML=`Bottles burned: ${totalBurn}`
                 }
                 getProp();
 
@@ -301,9 +302,6 @@
             </script>
             
 
-
-
-
     </head>
     <body>
         <div class="help">
@@ -433,7 +431,12 @@
                 </ul>
                 <div class="oddinfo">
                     <ul>
-                        <h3 id="odds">Odds are:</h3>
+                        <li>
+                            <h3 id="odds">Odds are:</h3>
+                        </li>
+                        <li>
+                            <h3 id="bottlesBurned">Bottles burned:</h3>
+                        </li>
                     </ul>
                 </div>
                 
