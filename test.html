@@ -75,10 +75,10 @@
                     let txt = document.getElementById('txtext')
                     if(f=='mint'){
                         title.innerHTML = 'Bottles minting'
-                        txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your <a href='${etherscanPre}/${tx}'> tx </a>`
+                        txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
                     } else if(f=='pop'){
                         title.innerHTML = 'Bottles popping'
-                        txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the <a href='${etherscanPre}/${tx}'> tx </a>`
+                        txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
                     }
                 }
                 function updatePop(f) {
@@ -271,7 +271,7 @@
                                     .on('transactionHash', function(hash){
                                         popUp('mint',amt,hash)
                                     })
-                                    .on('reciept', function(){
+                                    .on('confirmation', function(){
                                         updatePop('mint');
                                     });
                                     
