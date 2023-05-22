@@ -14,6 +14,7 @@
             <script>
 
                 const web3 = new Web3(Web3.givenProvider); 
+                //console.log(web3)
                 var accounts = [];
                 var friend;
                 var approve;
@@ -24,37 +25,36 @@
                 var saleOn = true;
                 var etherscanPre = 'https://etherscan.io/tx/'
 
-                                    // main                    
+                                    // Prod
                 const bottleAddress = "0xE0c839D60F15dD0B939e93d9eeaB5ecDA9AffE57";
-                const icolaAddress = "";
-                const capAddress = "";
+                const icolaAddress = "0x2C816B0cA58256703CBCD19825556A48dfd16174";
+                const capAddress = "0xB91541bda08d83EcCdEFD8Da2d6F9566F8a8FcB9";
 
                 // The ABI of the smart contract
                 const bottleContractABI = 
-                [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"ApprovalCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"ApprovalQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"BalanceQueryForZeroAddress","type":"error"},{"inputs":[],"name":"InvalidQueryRange","type":"error"},{"inputs":[],"name":"MintERC2309QuantityExceedsLimit","type":"error"},{"inputs":[],"name":"MintToZeroAddress","type":"error"},{"inputs":[],"name":"MintZeroQuantity","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"OwnerQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"OwnershipNotInitializedForExtraData","type":"error"},{"inputs":[],"name":"TransferCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"TransferFromIncorrectOwner","type":"error"},{"inputs":[],"name":"TransferToNonERC721ReceiverImplementer","type":"error"},{"inputs":[],"name":"TransferToZeroAddress","type":"error"},{"inputs":[],"name":"URIQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"fromTokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"toTokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"ConsecutiveTransfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"IPFSURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bottlePrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bulkPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bottle","type":"uint256"},{"internalType":"uint256","name":"friend","type":"uint256"},{"internalType":"uint256","name":"bulk","type":"uint256"}],"name":"changePrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"explicitOwnershipOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenIds","type":"uint256[]"}],"name":"explicitOwnershipsOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"flipSaleState","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"holder","type":"address"}],"name":"friendCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"friendPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintFriend","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintNew","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"s_MAXMILADYCOLA","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"s_saleIsActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"baseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"tokensOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"stop","type":"uint256"}],"name":"tokensOfOwnerIn","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]
-                const icolaContractABI = '';
-                const capContractABI = '';
-
-                //this is the current ipfs that is pinned on pinata ipfs://QmRfNWL61NCXdob7nvwUoSdaDRZezbHrKvqFVSFn4RexrX/ 
-                //btw this is new nftup cid for images: bafybeigi6wtbunxh3xvybcij7kasu2ms3pop3celdpxwkvcx2tcqvnyl6i
-                //btw ths is new nftup cid for json : ipfs://bafybeicyx3t6ex3ei3ye3lhpsaoe4chvheon46jjkkr2pirtcflhtxblty
-
-                //const contractPromise = new Promise(function (resolve, reject) 
-                const contract = new web3.eth.Contract(bottleContractABI, bottleAddress);
-                // const icola = new web3.eth.Contract(icolaContractABI, icolaAddress);
-                // const cap = new web3.eth.Contract(capContractABI, capAddress);
+                [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"ApprovalCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"ApprovalQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"BalanceQueryForZeroAddress","type":"error"},{"inputs":[],"name":"InvalidQueryRange","type":"error"},{"inputs":[],"name":"MintERC2309QuantityExceedsLimit","type":"error"},{"inputs":[],"name":"MintToZeroAddress","type":"error"},{"inputs":[],"name":"MintZeroQuantity","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"OwnerQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"OwnershipNotInitializedForExtraData","type":"error"},{"inputs":[],"name":"TransferCallerNotOwnerNorApproved","type":"error"},{"inputs":[],"name":"TransferFromIncorrectOwner","type":"error"},{"inputs":[],"name":"TransferToNonERC721ReceiverImplementer","type":"error"},{"inputs":[],"name":"TransferToZeroAddress","type":"error"},{"inputs":[],"name":"URIQueryForNonexistentToken","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"fromTokenId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"toTokenId","type":"uint256"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"ConsecutiveTransfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[],"name":"IPFSURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bottlePrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"bulkPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bottle","type":"uint256"},{"internalType":"uint256","name":"friend","type":"uint256"},{"internalType":"uint256","name":"bulk","type":"uint256"}],"name":"changePrice","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"explicitOwnershipOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership","name":"","type":"tuple"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"tokenIds","type":"uint256[]"}],"name":"explicitOwnershipsOf","outputs":[{"components":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint64","name":"startTimestamp","type":"uint64"},{"internalType":"bool","name":"burned","type":"bool"},{"internalType":"uint24","name":"extraData","type":"uint24"}],"internalType":"struct IERC721A.TokenOwnership[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"flipSaleState","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"holder","type":"address"}],"name":"friendCheck","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"friendPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintFriend","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"}],"name":"mintNew","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"s_MAXMILADYCOLA","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"s_saleIsActive","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"baseURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"tokensOfOwner","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"start","type":"uint256"},{"internalType":"uint256","name":"stop","type":"uint256"}],"name":"tokensOfOwnerIn","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+                const icolaContractABI = 
+                [{"inputs":[{"internalType":"uint64","name":"subscriptionId","type":"uint64"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"Loser","type":"error"},{"inputs":[],"name":"NotYourBottles","type":"error"},{"inputs":[{"internalType":"address","name":"have","type":"address"},{"internalType":"address","name":"want","type":"address"}],"name":"OnlyCoordinatorCanFulfill","type":"error"},{"inputs":[],"name":"OnlyTenAtATime","type":"error"},{"inputs":[],"name":"RaffleNotLive","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"playa","type":"address"},{"indexed":false,"internalType":"uint256","name":"requestId","type":"uint256"},{"indexed":false,"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"name":"RequestFulfilled","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"requestId","type":"uint256"},{"indexed":false,"internalType":"uint32","name":"numWords","type":"uint32"}],"name":"RequestSent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"uint256","name":"requestId","type":"uint256"},{"indexed":false,"internalType":"address","name":"playa","type":"address"}],"name":"winner","type":"event"},{"inputs":[],"name":"_bottleAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_capAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"_miladyXAddress","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"acceptOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"luckyMilady","type":"address"}],"name":"annointWinner","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"bottleTokenNums","type":"uint256[]"}],"name":"bottlePop","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256[]","name":"bottleTokenNums","type":"uint256[]"}],"name":"checkBottleOwner","outputs":[],"stateMutability":"view","type":"function"},{"inputs":[],"name":"checkMIL","outputs":[{"internalType":"uint256","name":"mil","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"claimWCap","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_requestId","type":"uint256"}],"name":"getRequestStatus","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"goSwitch","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"lastRequestId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"miladyWinners","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"odds","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"raffleOn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"requestId","type":"uint256"},{"internalType":"uint256[]","name":"randomWords","type":"uint256[]"}],"name":"rawFulfillRandomWords","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"requestIds","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"s_requests","outputs":[{"internalType":"bool","name":"fulfilled","type":"bool"},{"internalType":"bool","name":"exists","type":"bool"},{"internalType":"address","name":"playa","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint32","name":"newGas","type":"uint32"}],"name":"setGasLimit","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint32","name":"newOdds","type":"uint32"}],"name":"setOdds","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawMIL","outputs":[],"stateMutability":"nonpayable","type":"function"}];
+                const capContractABI = 
+                [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[],"name":"AccountBalanceOverflow","type":"error"},{"inputs":[],"name":"AdminOnlyMint","type":"error"},{"inputs":[],"name":"ArrayLengthsMismatch","type":"error"},{"inputs":[],"name":"InsufficientBalance","type":"error"},{"inputs":[],"name":"NewOwnerIsZeroAddress","type":"error"},{"inputs":[],"name":"NoHandoverRequest","type":"error"},{"inputs":[],"name":"NotOwnerNorApproved","type":"error"},{"inputs":[],"name":"TransferToNonERC1155ReceiverImplementer","type":"error"},{"inputs":[],"name":"TransferToZeroAddress","type":"error"},{"inputs":[],"name":"Unauthorized","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"isApproved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverCanceled","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"pendingOwner","type":"address"}],"name":"OwnershipHandoverRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256[]","name":"ids","type":"uint256[]"},{"indexed":false,"internalType":"uint256[]","name":"amounts","type":"uint256[]"}],"name":"TransferBatch","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"TransferSingle","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"value","type":"string"},{"indexed":true,"internalType":"uint256","name":"id","type":"uint256"}],"name":"URI","type":"event"},{"inputs":[],"name":"_uri","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"owners","type":"address[]"},{"internalType":"uint256[]","name":"ids","type":"uint256[]"}],"name":"balanceOfBatch","outputs":[{"internalType":"uint256[]","name":"balances","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"cancelOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"capLoop","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"completeOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"count","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"result","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"numberOfTokens","type":"uint256"},{"internalType":"address","name":"player","type":"address"}],"name":"mintLCaps","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"player","type":"address"}],"name":"mintWCap","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"result","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"pendingOwner","type":"address"}],"name":"ownershipHandoverExpiresAt","outputs":[{"internalType":"uint256","name":"result","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"ownershipHandoverValidFor","outputs":[{"internalType":"uint64","name":"","type":"uint64"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[],"name":"requestOwnershipHandover","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256[]","name":"ids","type":"uint256[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"safeBatchTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newAdmin","type":"address"}],"name":"setAdmin","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"isApproved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"newLoop","type":"uint256"}],"name":"setCapLoop","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"newuri","type":"string"}],"name":"setURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"result","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"uri","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}];
+                
+                const bottle = new web3.eth.Contract(bottleContractABI, bottleAddress);
+                const icola = new web3.eth.Contract(icolaContractABI, icolaAddress);
+                const cap = new web3.eth.Contract(capContractABI, capAddress);
 
                 async function getProp() {
-                                    
+                    
                     saleOn=await bottle.methods.s_saleIsActive().call();
                     totalSup = await bottle.methods.totalSupply().call();
-                    //totalBurn = await cap.methods.totalSupply().call();
-                    //odds = await icola.methods.odds().call();
-                    //mil = await icola.methods.checkMIL().call();
-                    //winners = await icola.methods.winners().call();
+                    raffleLive = await icola.methods.raffleOn().call();
+                    count = await cap.methods.count().call();
+                    odds = await icola.methods.odds().call();
+                    mil = await icola.methods.checkMIL().call();
 
-                    // document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
-                    // document.getElementById("bottlesBurned").innerHTML=`Bottles burned: ${totalBurn}`
+                    console.log(totalSup,"tokens")
+                    console.log(odds)
+                    document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
+                    document.getElementById("bottlesBurned").innerHTML=`Raffle Live???: ${raffleLive} ... ${count} bottles burned`
                 
                 }
                 getProp();
@@ -97,6 +97,7 @@
                 
                 // Connect to the MetaMask wallet
                 connectWallet = async() => {
+                    console.log('you clicked connect')
                     let connected = false;
                     try {
                         accounts = await web3.eth.requestAccounts().then()
@@ -111,9 +112,10 @@
                         connectbutt.style.fontSize = "20px";
 
                         var networkId = await web3.eth.net.getId();
-                        if (networkId !== 1) {
+                        // console.log(networkId);
+                        if (networkId !== 11155111) {
                         // Show an error message or take other appropriate action
-                        alert('change your network to eth main')
+                        alert('change your network to sepolia')
                         }
 
                         checkWallet();
@@ -121,34 +123,37 @@
                 }
                 // See if qualify for discount AND if approveAll icola
                 checkWallet = async() => {
-                    //console.log('whats in your wallet');
+                    console.log('whats in your wallet');
+                    test = false;
                     try {
-                        friend = await contract.methods
-                        .friendCheck(accounts[0]).call();
-                        //this needs to be milady and friend check respectively
+                        friend = await bottle.methods
+                        .tokensOfOwner(accounts[0]).call();
                     } catch(err){
+                        console.log(err);
                         errorTell(err.message);
                     }
-                    // try {
-                    //     approve = await bottle.methods
-                    //     .isApprovedForAll(accounts[0],icolaAddress)
-                    //     .call();
-                    // } catch(err){
-                    //     console.log(err);
-                    //     errorTell(err.message)
-                    // }
-                    // console.log('is we approved',approve)
+                    //console.log('is we friend? : ', friend.length)
+                    try {
+                        approve = await bottle.methods
+                        .isApprovedForAll(accounts[0],icolaAddress)
+                        .call();
+                    } catch(err){
+                        console.log(err);
+                        errorTell(err.message)
+                    }
+                    console.log('is we approved',approve)
                 }
-
-                //primer ux
+                
+                //primer
                 function phaseTwoMint() {
-                    if (saleOn){
+                    if (saleOn || test){
                         hide("mint-button");
                         show("mnt-btn");
                         show("mint-input");
                     } else {
                         alert('sale is not active, come back soon')
                     }
+
                 }
                 phaseTwoRedeem = async () => {
                     var playerBottles
@@ -226,43 +231,40 @@
                 //contract interaction
                 //mint bottles
                 mint = async(amt) => {
+                    console.log('we mintin');
                     document.getElementById("mint-button").style.display = "block";
                     document.getElementById("mnt-btn").style.display = "none";
                     document.getElementById("mint-input").style.display = "none";
 
                     amt = parseInt(document.getElementById("mint-input").value);
+                    console.log(amt);
                     if(!accounts[0]){
                         alert('connect your wallet')
                     }
-                    if(amt > 48){
-                        alert('BTW This will not work, you can only buy 48 pack at a time')
+                    if(amt > 24){
+                        alert('BTW This will not work, you can only buy 24 pack at a time')
                     }
                     var mintbutt = document.getElementById('mint-button');
                         mintbutt.innerText = 'Minting';
                         mintbutt.disabled = true;
                         
-                    if (friend > 0) {
-                        value = amt * 10000000000000000;
-                        try {
-                            await contract.methods
-                                .mintFriend(amt)
-                                .send({
-                                    from: accounts[0],
-                                    value: value
-                                })
-                                .on('transactionHash', function(hash){
-                                        popUp('mint',amt,hash)
-                                });;
-                        } catch (err) {
-                            errorTell(err.message);
-                        }
-                        mintbutt.innerText = 'Mint Bottles';
-                        mintbutt.disabled = false;
-                    } else {
-                        if(amt < 10) {
+                    // if (friend > 0) {
+                    //     value = amt * 10000000000000000;
+                    //     try {
+                    //         await contract.methods
+                    //             .mintFriend(amt)
+                    //             .send({
+                    //                 from: accounts[0],
+                    //                 value: value
+                    //             });
+                    //     } catch (err) {
+                    //         errorTell(err.message);
+                    //     }
+                    // } else {
+                        // if (amt < 11) {
                             value = amt * 12500000000000000;
                             try {
-                                await contract.methods
+                                await bottle.methods
                                     .mintNew(amt)
                                     .send({
                                         from: accounts[0],
@@ -271,35 +273,32 @@
                                     .on('transactionHash', function(hash){
                                         popUp('mint',amt,hash)
                                     });
-                            } catch (err) {
-                                errorTell(err.message);
-                            }
-                            mintbutt.innerText = 'Mint Bottles';
-                            mintbutt.disabled = false;
-                        } else {
-                            value = amt * 11000000000000000;
-                            try {
-                                await contract.methods
-                                    .mintNew(amt)
-                                    .send({
-                                        from: accounts[0],
-                                        value: value
-                                    })
-                                    .on('transactionHash', function(hash){
-                                        popUp('mint',amt,hash)
-                                    });;
                                     
                             } catch (err) {
                                 errorTell(err.message);
                             }
                             mintbutt.innerText = 'Mint Bottles';
                             mintbutt.disabled = false;
-                        }
+                        // } else {
+                        //     value = amt * 11000000000000000;
+                        //     try {
+                        //         await bottle.methods
+                        //             .mintNew(amt)
+                        //             .send({
+                        //                 from: accounts[0],
+                        //                 value: value
+                        //             });
+                        //             alert(`oh my gosh you just minted ${amt} MiladyCola Bottles!`)
+                        //     } catch (err) {
+                        //         errorTell(err.message);
+                        //     }
+                            // mintbutt.innerText = 'Mint Bottles';
+                            // mintbutt.disabled = false;
                         
-                    }
+                        
+                    
                     
                 }
-
                 //pop bottles
                 pop = async() => {
                     show("redeem-button");
@@ -331,8 +330,7 @@
                 }
             
             </script>
-
-
+            
 
     </head>
     <body>
@@ -341,26 +339,25 @@
                 <ul>
                     <li>
                         <div class="dropdown">
-                            About
-                                <div id="aboutdrop" class="dropitems">
-                                    <p>MiladyCola is a raffle lottery NFT that you can burn for a chance to win 1 Milady!</p>
-                                    <p>The MiladyCola bottles come in multiple flavors that nod to loveable milady derivatives</p>
-                                    <p>When you drink/burn your bottle nft and redeem it for a cap nft, you are interacting with a second contract that utilizes chainlink vrf to determine our winners!</p>
-                                    <p>It only takes 1 MiladyCola and a little bit of luck to WIN</p>
-                                    <p>2/3 of the mint proceeds go towards sweeping MILx on NFTX for our winners, the rest goes to purchasing 2,500LINK for the vrf work as well as compensating the artist and developer</p>
-                                    <p>The odds of winning will depend on how much MILx we can acquire with the mint proceeds. Once we get enough milady and link we will calculate odds</p>
-                                    <p>Winners will have 1.02 MILx automatically deposited into their wallet for a random redeem from the NFTX vault!</p>
-                                </div>
+                        About
+                            <div id="aboutdrop" class="dropitems">
+                                <p>MiladyCola is a raffle lottery NFT that you can burn for a chance to win 1 Milady!</p>
+                                <p>The MiladyCola bottles come in multiple flavors that nod to loveable milady derivatives</p>
+                                <p>When you drink/burn your bottle nft and redeem it for a cap nft, you are interacting with a second contract that utilizes chainlink vrf to determine our winners!</p>
+                                <p>It only takes 1 MiladyCola and a little bit of luck to WIN</p>
+                                <p>2/3 of the mint proceeds go towards sweeping MILx on NFTX for our winners, the rest goes to purchasing 2,500LINK for the vrf work as well as compensating the artist and developer</p>
+                                <p>The odds of winning will depend on how much MILx we can acquire with the mint proceeds. Once we get enough milady and link we will calculate odds</p>
+                                <p>Winners will have 1.02 MILx automatically deposited into their wallet for a random redeem from the NFTX vault!</p>
+                            </div>
                         </div>
                     </li>
                     <li>
                         <div class="dropdown">
                         Contracts
-                        <div id="contractdrop" class="dropitems">
-                                <p>MiladyCola Bottle NFT Contract <a href="https://etherscan.io/address/0xe0c839d60f15dd0b939e93d9eeab5ecda9affe57#code">view on etherscan</a></p>
+                            <div id="contractdrop" class="dropitems">
+                                <p>MiladyCola Bottle NFT Contract <a href="https://sepolia.etherscan.io/address/0xfac6478a6e9cece4931b25a7d938c013f4568779#code">view on etherscan</a></p>
                                 <p>MiladyCola Cap NFT Contract <a href="https://sepolia.etherscan.io/address/0x685b18abdc4053f4680d60e4f0a351e366ca8c3b#code">view on etherscan</a></p>
                                 <p>MiladyCola Raffle NFT Contract <a href="https://sepolia.etherscan.io/address/0x8a8a1b7fd9204d307982d610c92b2227961d3d33#code">view on etherscan</a></p>
-                                <p>Admin Wallet <a href="https://etherscan.io/address/0xFfDAe607cd28f6Db1303eC333Aa37A13E01f78Dd">view on etherscan</a></p>
                             </div>
                         </div>
                     </li>
@@ -385,7 +382,7 @@
                             FAQ
                             <div id="faqdrop" class="dropitems">
                                 <h3>How much are they?</h3>
-                                <p>.0125 a pop (.011 in batches greater than 10) or .01 for milady and friends (remilio,cigawrette,aura,miladystation)</p>
+                                <p>.0125 a pop (.011 in batches greater than 10) or .01 for milady and friends (remilio,cigawrette,milady aura,miladystation)</p>
                                 <p>omg and the first 349 friends get a freebie</p>
                                 <h3>Do we pay the link for the vrf?</h3>
                                 <p>nope, part of the mint fund goes toward the vrf link, we got you</p>
@@ -440,15 +437,19 @@
             </div>
         </div>
         
-        <div id="txinfo" class="popup">
-            <button id="popx" onclick="closePop()">X</button>
-            <div class="popupstuff">
-                <h3 id="txtitle">tx title</h3>
-                <p id="txtext">tx info blablablablablablablabalbla</p>
-                <img src="public/sodapopinski.gif"/>
-            </div>
-        </div>
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+            <div id="progress-text"></div>
+          </div>
         
+            <div id="txinfo" class="popup">
+                <button id="popx" onclick="closePop()">X</button>
+                <div class="popupstuff">
+                    <h3 id="txtitle">tx title</h3>
+                    <p id="txtext">tx info blablablablablablablabalbla</p>
+                    <img src="public/sodapopinski.gif"/>
+                </div>
+            </div>
             <nav>
                 
                 <ul>
@@ -457,7 +458,7 @@
                         <input class="mint-input" id="mint-input"/>
                         <button id="mnt-btn" onclick="mint()">Mint Bottle(s)</button>
                     </li>
-                    <!-- <li>
+                    <li>
                         <button id="redeem-button" onclick="phaseTwoRedeem()">Redeem Cap</button>
                         <button id="approve-button" onclick="setApprove()">Approve Bottles</button>
                         <div id="bottleList">
@@ -465,7 +466,7 @@
                             </ul>
                         </div>
                         <button id="pop" onclick="pop()">Pop Bottles</button>
-                    </li> -->
+                    </li>
                     <li>            
                         <audio controls autoplay loop>
                             <source src="public/ColaSong.wav" type="audio/wav">
@@ -473,7 +474,7 @@
                         </audio>
                     </li>
                 </ul>
-                <!-- <div class="oddinfo">
+                <div class="oddinfo">
                     <ul>
                         <li>
                             <h3 id="odds">Odds are:</h3>
@@ -482,7 +483,8 @@
                             <h3 id="bottlesBurned">Bottles burned:</h3>
                         </li>
                     </ul>
-                </div> -->
+                </div>
+                
  
             </nav>
         </div>
@@ -496,6 +498,31 @@
         </footer>
         
     </body>
+                <!-- progress bar -->
+                <script>
+                        // function sleep(ms) {
+                        //     return new Promise((resolve) => {
+                        //     setTimeout(resolve, ms);
+                        //     });
+                        // }
+                        // sleep(10000);
+
+                        // // Get the total supply information from the contract
+                        // const totalSupply = 10000;
+                        // // Assume that you have a variable called "mintedCount" that tracks the number of tokens that have been minted so far
+                        // const mintedCount = totalSup;
+                        // //const mintedCount = 1000;
+                        
+                        // // Calculate the percentage of minting progress
+                        // const progressPercentage = (mintedCount / totalSupply) * 100;
+                        
+                        // // Update the progress bar width and text
+                        
+                        // document.getElementById("progress-bar").style.width = progressPercentage + "%";
+                        // document.getElementById("progress-text").innerHTML = progressPercentage.toFixed(2) + "% Minted";
+                        // console.log('were making a progress bar')
+                </script>
+
                             <!-- mobile tapping -->
             <script>
                 // Get all dropdown elements
@@ -534,5 +561,5 @@
                     el.removeAttribute("class","dropitemsee");
                     el.setAttribute("class","dropitems");
                 }
-            </script>  
+            </script>
 </html>
