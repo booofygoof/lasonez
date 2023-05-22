@@ -248,20 +248,22 @@
                         mintbutt.innerText = 'Minting';
                         mintbutt.disabled = true;
                         
-                    // if (friend > 0) {
-                    //     value = amt * 10000000000000000;
-                    //     try {
-                    //         await contract.methods
-                    //             .mintFriend(amt)
-                    //             .send({
-                    //                 from: accounts[0],
-                    //                 value: value
-                    //             });
-                    //     } catch (err) {
-                    //         errorTell(err.message);
-                    //     }
-                    // } else {
-                        // if (amt < 11) {
+                    if (friend > 0) {
+                        value = amt * 10000000000000000;
+                        try {
+                            await contract.methods
+                                .mintFriend(amt)
+                                .send({
+                                    from: accounts[0],
+                                    value: value
+                                });
+                        } catch (err) {
+                            errorTell(err.message);
+                        }
+                        mintbutt.innerText = 'Mint Bottles';
+                        mintbutt.disabled = false;
+                    } else {
+                        if (amt < 11) {
                             value = amt * 12500000000000000;
                             try {
                                 await bottle.methods
@@ -279,25 +281,23 @@
                             }
                             mintbutt.innerText = 'Mint Bottles';
                             mintbutt.disabled = false;
-                        // } else {
-                        //     value = amt * 11000000000000000;
-                        //     try {
-                        //         await bottle.methods
-                        //             .mintNew(amt)
-                        //             .send({
-                        //                 from: accounts[0],
-                        //                 value: value
-                        //             });
-                        //             alert(`oh my gosh you just minted ${amt} MiladyCola Bottles!`)
-                        //     } catch (err) {
-                        //         errorTell(err.message);
-                        //     }
-                            // mintbutt.innerText = 'Mint Bottles';
-                            // mintbutt.disabled = false;
-                        
-                        
-                    
-                    
+                        } else {
+                            value = amt * 11000000000000000;
+                            try {
+                                await bottle.methods
+                                    .mintNew(amt)
+                                    .send({
+                                        from: accounts[0],
+                                        value: value
+                                    });
+                                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles!`)
+                            } catch (err) {
+                                errorTell(err.message);
+                            }
+                            mintbutt.innerText = 'Mint Bottles';
+                            mintbutt.disabled = false;
+                        }
+                    }
                 }
                 //pop bottles
                 pop = async() => {
