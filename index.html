@@ -55,12 +55,7 @@
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
                     document.getElementById("bottlesBurned").innerHTML=`Raffle Live???: ${raffleLive} ... ${count} bottles burned`
-                    if(mil < 1){
-                        mil = "omg yes!!!"
-                    } else {
-                        mil = "nope not yet"
-                    }
-                    document.getElementById("Milady").innerHTML=`Has anyone won yet???: ${mil}`
+                    document.getElementById("Milady").innerHTML=`If this says 1.02 no one has won yet ${mil}`
                     
                 }
                 getProp();
