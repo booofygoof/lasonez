@@ -55,7 +55,13 @@
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
                     document.getElementById("bottlesBurned").innerHTML=`Raffle Live???: ${raffleLive} ... ${count} bottles burned`
-                
+                    if(mil < 1){
+                        mil = "omg yes!!!"
+                    } else {
+                        mil = "nope not yet"
+                    }
+                    document.getElementById("Milady").innerHTML=`Has anyone won yet???: ${mil}`
+                    
                 }
                 getProp();
 
@@ -497,6 +503,9 @@
                         </li>
                         <li>
                             <h3 id="bottlesBurned">Bottles burned:</h3>
+                        </li>
+                        <li>
+                            <h3 id="milady">Has anyone won yet?</h3>
                         </li>
                     </ul>
                 </div>
