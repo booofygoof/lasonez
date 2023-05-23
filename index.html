@@ -317,6 +317,9 @@
                     //var list = `${targets}`;
                     console.log(targets);
                     console.dir(targets);
+                    if(targets.length == 0){
+                        alert('wait no you have to pick the bottles you want to pop, dont accept this tx')
+                    }
                     try {
                         await icola.methods
                         .bottlePop(targets)
