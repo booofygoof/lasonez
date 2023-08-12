@@ -248,9 +248,6 @@
                     if(amt > 24){
                         alert('BTW This will not work, you can only buy 24 pack at a time')
                     }
-                    if(amt < 4){
-                        alert('You are popping less than a 4 pack so we gotta throw you in the queue unless you pay the extra fee')
-                    }
                     var mintbutt = document.getElementById('mint-button');
                         mintbutt.innerText = 'Minting';
                         mintbutt.disabled = true;
@@ -315,7 +312,12 @@
                     //var list = `${targets}`;
                     console.log(targets);
                     console.dir(targets);
-                    try {
+                    var skip;
+                    if(targets.length < 4){
+                        skip = confirm("you are popping less than 4 bottles which puts you in a queue, would you like to skip the queue for .0045 ETH?")
+                    }
+                    if(!skip){
+                        try {
                         await icola.methods
                         .bottlePop(targets)
                         .send({
@@ -326,10 +328,28 @@
                             popUp('pop',targets,hash);
                         });
                         
-                    } catch(err) {
-                        console.log(err)
-                        errorTell(err.message);
+                        } catch(err) {
+                            console.log(err)
+                            errorTell(err.message);
+                        }
+                    } else {
+                        try {
+                        await icola.methods
+                        .bottlePop(targets)
+                        .send({
+                            from: accounts[0],
+                            value: 4500000000000000
+                        })
+                        .on('transactionHash', function(hash){
+                            popUp('pop',targets,hash);
+                        });
+                        
+                        } catch(err) {
+                            console.log(err)
+                            errorTell(err.message);
+                        }
                     }
+                    
                     document.getElementById("redeem-button").disabled = false;
                     document.getElementById("bottleList").innerHTML = "";
                     targets = [];
