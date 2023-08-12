@@ -24,6 +24,9 @@
                 var test =false;
                 var saleOn = true;
                 var etherscanPre = 'https://sepolia.etherscan.io/tx/'
+                var accountHash;// = web3.utils.soliditySha3(accounts[0]);
+                var proof;// = tree.getHexProof(accountHash);
+                var club = false;
 
                                     // Test
                 const bottleAddress = "0xFac6478a6e9Cece4931b25a7d938c013F4568779";
@@ -49,12 +52,13 @@
                     raffleLive = await icola.methods.raffleOn().call();
                     odds = await icola.methods.odds().call();
                     mil = await icola.methods.checkMIL().call();
+                    //clubPrizeCA = await icola.methods.clubPrizeCA().call();
 
                     console.log(totalSup,"tokens")
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
                     document.getElementById("bottlesBurned").innerHTML=`Raffle Live???: ${raffleLive}`
-                
+                    //document.getElementById("club-prize").innerHTML=`Current Prize Contract Address: ${clubPrizeCA}`
                 }
                 getProp();
 
@@ -146,6 +150,11 @@
                         errorTell(err.message)
                     }
                     console.log('is we approved',approve)
+                    accountHash = web3.utils.soliditySha3(accounts[0]);
+                    proof = tree.getHexProof(accountHash);
+                    club = tree.verify(proof,accountHash,root);
+                    console.log('check wallet club ',club)
+                    if(club){get('club').display = "block";}
                 }
                 
                 //primer
@@ -356,7 +365,7 @@
                     targets = [];
                     
                 }
-            
+                //club pop
             </script>
             
 
@@ -512,6 +521,13 @@
                         </li>
                     </ul>
                 </div>
+                <div id="club" class="bottle-club" display="none">
+                    <h2>Bottle Club Exclusive Raffle</h2>
+                    <h3>You are among the chosen few who can play this raffle</h3>
+                    <h3 id="club-prize"></h3>
+                    <button id="club-pop" onclick="club()">Play Exclusive Secondary Raffle</button>
+                    
+                </div>
                 
  
             </nav>
@@ -524,7 +540,38 @@
             <img src="public/lain.gif"/>
             <img src="public/soda-cow.gif"/>
         </footer>
+                <!-- merkle -->
+                <script src="https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js"></script>
+                <script>
+                    // miladystation holders (+ first 4 for testing )
+                    //first 3 wallets, forge test, forge anvil cast account 0, miladycola test wallet
+                    const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4']
+                        .map(x => web3.utils.soliditySha3(x));
+                    //const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5','0xE220F9370Af26471Eba309975E827B66BaDbD4F5'].map( x => web3.utils.soliditySha3(x));
+                    // 0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496
+                    
+                    const tree = new MerkleTree(leaves, web3.utils.soliditySha3, { sort: true });
+                    const root = tree.getHexRoot();
         
+                    function sharry(first,second) {
+                        return web3.utils.soliditySha3(web3.utils.encodePacked(first,second));
+                    }
+        
+                    function manualCheck(proof) {
+                        for(i = 0; i< proof.length; i++) {
+                            sharry
+                        }
+                    }
+
+                    function proveAnyone(address) {
+                        var leaf = web3.utils.soliditySha3(address);
+                        var proof = tree.getHexProof(leaf);
+                        if (tree.verify(proof,leaf,root)){
+                            return tree.getHexProof(leaf);
+                        }
+                    }
+                    
+                </script>
     </body>
                 <!-- progress bar -->
                 <script>
@@ -590,4 +637,5 @@
                     el.setAttribute("class","dropitems");
                 }
             </script>
+            
 </html>
