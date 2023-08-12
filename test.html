@@ -312,10 +312,11 @@
                     //var list = `${targets}`;
                     console.log(targets);
                     console.dir(targets);
-                    var skip;
+                    var skip = false;
                     if(targets.length < 4){
                         skip = confirm("you are popping less than 4 bottles which puts you in a queue, would you like to skip the queue for .0045 ETH?")
                     }
+                    console.log('what is skip ',skip)
                     if(!skip){
                         try {
                         await icola.methods
