@@ -37,7 +37,7 @@
 }
 
 body {
-    background-color: lightgray;
+    background-color: #f9f9f9;
 }
 .landing {
     background-image: url('public/vend.svg');
