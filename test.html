@@ -581,14 +581,15 @@
                 <script>
                     // miladystation holders (+ first 4 for testing )
                     //first 3 wallets, forge test, forge anvil cast account 0, miladycola test wallet
-                    const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4']
-                        .map(x => web3.utils.soliditySha3(x));
-                    //const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5','0xE220F9370Af26471Eba309975E827B66BaDbD4F5'].map( x => web3.utils.soliditySha3(x));
+                    // const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4']
+                    //     .map(x => web3.utils.soliditySha3(x));
+                    const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5','0xE220F9370Af26471Eba309975E827B66BaDbD4F5']
+                    .map( x => web3.utils.soliditySha3(x));
                     // 0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496
                     
                     tree = new MerkleTree(leaves, web3.utils.soliditySha3, { sort: true });
                     const root = tree.getHexRoot();
-                    
+                    console.log('root:',root)
                     function sharry(first,second) {
                         return web3.utils.soliditySha3(web3.utils.encodePacked(first,second));
                     }
