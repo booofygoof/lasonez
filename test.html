@@ -26,6 +26,7 @@
                 var etherscanPre = 'https://sepolia.etherscan.io/tx/'
                 var accountHash;// = web3.utils.soliditySha3(accounts[0]);
                 var proof;// = tree.getHexProof(accountHash);
+                var tree;
                 var club = false;
                 var clubTicketPrice;
                 var clubOdds;
@@ -378,13 +379,13 @@
                 }
                 //club pop
                 clubPop = async() => {
-                    var accountHash = web3.utils.soliditySha3(accounts[0]);
+                    accountHash = web3.utils.soliditySha3(accounts[0]);
                         
-                    var proofClub = tree.getHexProof(accountHash);
+                    proof = tree.getHexProof(accountHash);
                     console.log('proof: ',proof);
                     try {
                         await icola.methods
-                        .bottleClubPop(proofClub)
+                        .bottleClubPop(proof)
                         .send({
                             from: accounts[0],
                             value: clubTicketPrice
@@ -585,9 +586,9 @@
                     //const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5','0xE220F9370Af26471Eba309975E827B66BaDbD4F5'].map( x => web3.utils.soliditySha3(x));
                     // 0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496
                     
-                    const tree = new MerkleTree(leaves, web3.utils.soliditySha3, { sort: true });
+                    tree = new MerkleTree(leaves, web3.utils.soliditySha3, { sort: true });
                     const root = tree.getHexRoot();
-        
+                    
                     function sharry(first,second) {
                         return web3.utils.soliditySha3(web3.utils.encodePacked(first,second));
                     }
