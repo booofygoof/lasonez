@@ -165,7 +165,7 @@
                     proof = tree.getHexProof(accountHash);
                     club = tree.verify(proof,accountHash,root);
                     console.log('check wallet club ',club)
-                    if(club){get('club').display = "block";}
+                    if(club){document.getElementById('club').display = "block";}
                 }
                 
                 //primer
@@ -378,10 +378,13 @@
                 }
                 //club pop
                 clubPop = async() => {
-                    
+                    var accountHash = web3.utils.soliditySha3(accounts[0]);
+                        
+                    var proofClub = tree.getHexProof(accountHash);
+                    console.log('proof: ',proof);
                     try {
                         await icola.methods
-                        .bottleClubPop(proof)
+                        .bottleClubPop(proofClub)
                         .send({
                             from: accounts[0],
                             value: clubTicketPrice
