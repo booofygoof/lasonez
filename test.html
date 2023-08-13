@@ -378,9 +378,10 @@
                 }
                 //club pop
                 clubPop = async() => {
+                    
                     try {
                         await icola.methods
-                        .bottleClubPop()
+                        .bottleClubPop(proof)
                         .send({
                             from: accounts[0],
                             value: clubTicketPrice
