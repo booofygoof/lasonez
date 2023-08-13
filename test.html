@@ -62,12 +62,20 @@
 
                     console.log(totalSup,"tokens")
                     console.log(odds)
+
+                }
+
+                popClub = () => {
+                    document.getElementById('club').display = "block";
+                    document.getElementById('club-title').innerHTML = "Bottle Club Exclusive Raffle";
+                    document.getElementById('club-tag').innerHTML = "You are among the chosen few who can play this raffle"
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
                     document.getElementById("bottlesBurned").innerHTML=`Raffle Live???: ${raffleLive}`
                     document.getElementById("club-on").innerHTML = `Club Raffle Live???: ${clubRaffleLive}`
                     document.getElementById("club-prize").innerHTML=`Current Prize Contract Address: ${clubPrizeCA}`
                     document.getElementById("club-price").innerHTML=`Entry Cost: ${clubTicketPrice}`
                     document.getElementById("club-odds").innerHTML=`Current Odds: 1/${clubOdds}`
+                    document.getElementById("club").innerHTML += `<button id="club-pop" onclick="clubPop()">Play</button>`;
                 }
                 getProp();
 
@@ -160,7 +168,7 @@
                     proof = tree.getHexProof(accountHash);
                     club = tree.verify(proof,accountHash,root);
                     console.log('check wallet club ',club)
-                    if(club){document.getElementById('club').display = "block";}
+                    if(club){popClub();}
                 }
                 
                 //primer
@@ -549,13 +557,12 @@
                     </ul>
                 </div>
                 <div id="club" class="bottle-club" display="none">
-                    <h2>Bottle Club Exclusive Raffle</h2>
-                    <h4>You are among the chosen few who can play this raffle</h4>
+                    <h2 id="club-title"></h2>
+                    <h4 id="club-tag"></h4>
                     <p id="club-on"></p>
                     <p id="club-prize"></p>
                     <p id="club-price"></p>
                     <p id="club-odds"></p>
-                    <button id="club-pop" onclick="clubPop()">Play</button>
                 </div>
                 
             </nav>
