@@ -230,6 +230,11 @@ nav {
   #pop {
     display: none;
   }
+  #club {
+    font-size: 20px;
+    overflow-y: scroll;
+    height: 150px;
+  }
   /* #bottleList ul li:hover {
     cursor: pointer;
     background-color: pink;
