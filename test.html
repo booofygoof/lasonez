@@ -75,10 +75,16 @@
                 }
 
                 popClub = () => {
+                    let live;
+                    if(clubPrize > 0){
+                        live = `We have ${clubPrize} tokens ready to be won`;
+                    } else {
+                        live = `Someone has won the spoils`
+                    }
                     document.getElementById('club').display = "block";
                     document.getElementById('club-title').innerHTML = "Bottle Club Exclusive Raffle";
                     document.getElementById('club-tag').innerHTML = "You are among the chosen few who can play this raffle"
-                    document.getElementById("club-on").innerHTML = `Club Raffle Live???: ${clubPrize}`
+                    document.getElementById("club-on").innerHTML = `Club Raffle Live???: ${live}`
                     document.getElementById("club-prize").innerHTML=`Current Prize Contract Address: ${clubPrizeCA}`
                     document.getElementById("club-price").innerHTML=`Entry Cost: ${clubTicketPrice/1e18}`
                     document.getElementById("club-odds").innerHTML=`Current Odds: 1/${clubOdds}`
@@ -86,11 +92,7 @@
                 }
                 getProp();
                 
-                while(true){
-                        setTimeout(function () { 
-                            refresh();
-                        }, 60 * 1000);
-                    }
+   
 
                 refresh = async() => {
 
@@ -153,6 +155,9 @@
                         title.innerHTML = 'Club Raffle Entry'
                         txt.innerHTML = `It's good to have you sir / milady. thank you for playing the MiladyCola Bottle Club Exclusive Secondary Raffle. If you won you will recieve your prizes shortly.`
                     }
+                    setTimeout(function () { 
+                            refresh();
+                        }, 60 * 1000);
                 }
                 function updatePop(f) {
                     let title = document.getElementById('txtitle')
