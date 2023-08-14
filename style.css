@@ -235,10 +235,10 @@ nav {
     overflow-y: scroll;
     height: 150px;
   }
-  /* #bottleList ul li:hover {
-    cursor: pointer;
-    background-color: pink;
-  } */
+  #bottleList ul li:hover {
+    height: 300px;
+    overflow-y: scroll;
+  }
   .bottle {
     font-family: gloock;
   }
