@@ -316,6 +316,7 @@
                     document.getElementById("club-price").innerHTML=`Entry Cost: ${clubTicketPrice/1e18}`
                     document.getElementById("club-odds").innerHTML=`Current Odds: 1/${clubOdds}`
                     document.getElementById("club-play").innerHTML = `play`;
+                    document.getElementById("club-play").display = `block`;
                 }
                 getProp();
                 
@@ -335,13 +336,20 @@
                     count = await cap.methods.count().call();
 
                     if(club){
+                        let live;
+                        if(clubPrize > 0){
+                            live = `We have ${clubPrize} tokens ready to be won`;
+                        } else {
+                            live = `Someone has won the spoils`
+                        }
                         document.getElementById('club').display = "block";
                         document.getElementById('club-title').innerHTML = "Bottle Club Exclusive Raffle";
                         document.getElementById('club-tag').innerHTML = "You are among the chosen few who can play this raffle"
-                        document.getElementById("club-on").innerHTML = `Club Raffle Live???: ${clubPrize}`
+                        document.getElementById("club-on").innerHTML = `Club Raffle Live???: ${live}`
                         document.getElementById("club-prize").innerHTML=`Current Prize Contract Address: ${clubPrizeCA}`
                         document.getElementById("club-price").innerHTML=`Entry Cost: ${clubTicketPrice/1e18}`
                         document.getElementById("club-odds").innerHTML=`Current Odds: 1/${clubOdds}`
+                        document.getElementById("club-play").display = `block`;
                         document.getElementById("club-play").innerHTML = `play`;
                     }
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
@@ -852,14 +860,14 @@
                     </ul>
                     <h3 id="milady"></h3>
                 </div>
-                <div id="club" class="bottle-club" display="none">
+                <div id="club" class="bottle-club">
                     <h2 id="club-title"></h2>
                     <h4 id="club-tag"></h4>
                     <p id="club-on"></p>
                     <p id="club-prize"></p>
                     <p id="club-price"></p>
                     <p id="club-odds"></p>
-                    <button id="club-play" onclick="clubPop()"></button>
+                    <button id="club-play" onclick="clubPop()" display="none"></button>
                 </div>
                 
             </nav>
