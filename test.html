@@ -33,6 +33,7 @@
                 var clubTicketPrice;
                 var clubOdds;
                 var clubPrize;
+                var clubPrizeCA;
 
                                     // Test
                 const bottleAddress = "0xFac6478a6e9Cece4931b25a7d938c013F4568779";
@@ -280,7 +281,7 @@
                     totalSup = await bottle.methods.totalSupply().call();
                     raffleLive = await icola.methods.raffleOn().call();
                     odds = await icola.methods.odds().call();
-                    count = await cap.methods.totalSupply().call();
+                    count = await cap.methods.count().call();
                     mil = await icola.methods.checkMIL().call();
                     clubPrizeCA = await icola.methods.clubPrizeCA().call();
                     clubTicketPrice = await icola.methods.clubTicketPrice().call();
@@ -314,7 +315,7 @@
                     document.getElementById("club-prize").innerHTML=`Current Prize Contract Address: ${clubPrizeCA}`
                     document.getElementById("club-price").innerHTML=`Entry Cost: ${clubTicketPrice/1e18}`
                     document.getElementById("club-odds").innerHTML=`Current Odds: 1/${clubOdds}`
-                    document.getElementById("club").innerHTML += `<button id="club-pop" onclick="clubPop()">Play</button>`;
+                    document.getElementById("club-play").innerHTML = `play`;
                 }
                 getProp();
                 
@@ -331,6 +332,7 @@
                     clubTicketPrice = await icola.methods.clubTicketPrice().call();
                     clubOdds = await icola.methods.oddsClub().call();
                     clubPrize = await icola.methods.checkClubPrize().call();
+                    count = await cap.methods.count().call();
 
                     if(club){
                         document.getElementById('club').display = "block";
@@ -857,6 +859,7 @@
                     <p id="club-prize"></p>
                     <p id="club-price"></p>
                     <p id="club-odds"></p>
+                    <button id="club-play" onclick="clubPop()"></button>
                 </div>
                 
             </nav>
