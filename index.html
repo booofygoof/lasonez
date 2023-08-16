@@ -94,11 +94,11 @@
                     }
                     checkFriend = async() => {
                         let friendScale = 0;
-                        friendScale += await parseInt(check721Balance(miladyAddress));
-                        friendScale += await parseInt(check721Balance(remilioAddress));
-                        friendScale += await parseInt(check721Balance(auraAddress));
-                        friendScale += await parseInt(check721Balance(cigAddress));
-                        friendScale += await parseInt(check721Balance(miladyAddress));
+                        friendScale += parseInt(await check721Balance(miladyAddress));
+                        friendScale += parseInt(await check721Balance(remilioAddress));
+                        friendScale += parseInt(await check721Balance(auraAddress));
+                        friendScale += parseInt(await check721Balance(cigAddress));
+                        friendScale += parseInt(await check721Balance(miladyAddress));
                         return friendScale;
                     }
                 //cosmetics
