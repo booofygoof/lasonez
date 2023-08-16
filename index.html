@@ -293,11 +293,14 @@
                     if (friend > 0) {
                         value = amt * 10000000000000000;
                         try {
-                            await contract.methods
+                            await bottle.methods
                                 .mintFriend(amt)
                                 .send({
                                     from: accounts[0],
                                     value: value
+                                })
+                                .on('transactionHash', function(hash){
+                                        popUp('mint',amt,hash)
                                 });
                         } catch (err) {
                             errorTell(err.message);
@@ -331,8 +334,10 @@
                                     .send({
                                         from: accounts[0],
                                         value: value
+                                    })
+                                    .on('transactionHash', function(hash){
+                                        popUp('mint',amt,hash)
                                     });
-                                    alert(`oh my gosh you just minted ${amt} MiladyCola Bottles!`)
                             } catch (err) {
                                 errorTell(err.message);
                             }
