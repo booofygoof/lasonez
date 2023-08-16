@@ -166,7 +166,7 @@
                 checkWallet = async() => {
                     console.log('whats in your wallet');
                     test = false;
-                    friend = checkFriend();
+                    friend = await checkFriend();
                     console.log('is we friend? : ', friend)
                     try {
                         approve = await bottle.methods
