@@ -192,7 +192,7 @@
                 }
                 phaseTwoRedeem = async () => {
                     if(!raffleLive){
-                        get('redeem-button').disabled = true;
+                        document.getElementById('redeem-button').disabled = true;
                     }
                     var playerBottles
                     if(!accounts[0]){
