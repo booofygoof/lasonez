@@ -191,6 +191,9 @@
 
                 }
                 phaseTwoRedeem = async () => {
+                    if(!raffleLive){
+                        get('redeem-button').disabled = true;
+                    }
                     var playerBottles
                     if(!accounts[0]){
                         alert('connect your wallet')
