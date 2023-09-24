@@ -89,18 +89,18 @@
 
                 async function getProp() {
                     
-                    saleOn=await bottle2.methods._saleOn().call();
-                    totalSup = await bottle2.methods.totalSupply().call();
+                    saleOn = await bottle2.methods._saleOn().call();
+                    totalSup = await parseInt(bottle2.methods.totalSupply().call());
                     raffleLive = await icola.methods.raffleOn().call();
-                    range = await icola.methods.starter().call() 
-                    count = await cap2.methods.count().call();
-                    odds = await icola.methods.odds().call();
+                    range = await parseInt(icola.methods.starter().call()); 
+                    count = await parseInt(cap2.methods.count().call());
+                    odds = await parseInt(icola.methods.odds().call());
                     mil = await icola.methods.checkMIL().call();
 
                     console.log(totalSup,"tokens")
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
-                    document.getElementById("bottlesBurned").innerHTML=`Raffle is Live: ${raffleLive} ... Caps #${range} to ${range + odds} are eligible ....${count + 484} bottles burned`;
+                    document.getElementById("bottlesBurned").innerHTML=`Raffle is Live: ${raffleLive} ... Caps #${range} to ${range + odds} are eligible ....${count} out of ${odds} bottles burned`;
                 }
                 getProp();
                 //check friends
@@ -346,7 +346,7 @@
                     document.getElementById("mint-button").style.display = "block";
                     document.getElementById("mnt-btn").style.display = "none";
                     document.getElementById("mint-input").style.display = "none";
-                    get('mnt2brn-btn').style.display = "none";
+                    document.getElementById('mnt2brn-btn').style.display = "none";
                 }
                 //mint bottles
                 mint = async(amt) => {
