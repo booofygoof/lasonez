@@ -101,7 +101,7 @@
                     console.log(totalSup,"tokens")
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
-                    document.getElementById("bottlesBurned").innerHTML=`Raffle Entry is Open: ${raffleLive} ... Caps #${range} to ${range + odds} are eligible ....${count-484} out of ${odds} bottles burned`;
+                    document.getElementById("bottlesBurned").innerHTML=`Raffle Entry is Open: ${raffleLive} ... Caps #${range} to ${range + odds} are eligible ....${count-485} out of ${odds} bottles burned`;
                 }
                 getProp();
                 //check friends
@@ -246,14 +246,13 @@
                     if (holdings.bottle1 == 0 && holdings.bottle2 == 0 && holdings.bottle1coin == 0){
                         alert('you literally dont have bottles in this wallet');
                     } else {
-                        if (!bottle1Approve) {
-                        hide("redeem-button")
-                        show("approve1-button")
+                        if (!bottle1Approve && holdings.bottle1 != 0) {
+                            hide("redeem-button")
+                            show("approve1-button")
                         }
-                        if (!bottle2Approve) {
+                        if (!bottle2Approve && holdings.bottle2 != 0) {
                             hide("redeem-button")
                             show("approve2-button")
-                            return
                         }
                     }
                    
@@ -322,7 +321,7 @@
                     }
                     }
                     approve = await bottle1.methods.isApprovedForAll(accounts[0],icolaAddress);
-                    hide("approve-button");
+                    hide("approve1-button");
                     show("redeem-button");
                 }
                 setApprove2 = async() => {
@@ -345,7 +344,7 @@
                     }
                     }
                     approve = await bottle2.methods.isApprovedForAll(accounts[0],icolaAddress);
-                    hide("approve-button");
+                    hide("approve2-button");
                     show("redeem-button");
                 }
                 
