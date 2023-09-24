@@ -20,6 +20,7 @@
                 var bottle2Approve;
                 var bottleCoinApprove;
                 var totalSup;
+                var range;
                 var targets = [];
                 var test =false;
                 var saleOn = true;
@@ -99,7 +100,7 @@
                     console.log(totalSup,"tokens")
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
-                    document.getElementById("bottlesBurned").innerHTML=`Raffle is Live: ${raffleLive} ... Caps #${starter} to ${starter + odds} are eligible ....${count + 484} bottles burned`;
+                    document.getElementById("bottlesBurned").innerHTML=`Raffle is Live: ${raffleLive} ... Caps #${range} to ${range + odds} are eligible ....${count + 484} bottles burned`;
                 }
                 getProp();
                 //check friends
