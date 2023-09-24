@@ -84,8 +84,8 @@
                 const bottle1 = new web3.eth.Contract(bottle1ContractABI, bottle1Address);
                 const bottle2 = new web3.eth.Contract(bottle2ContractABI, bottle2Address);
                 const icola = new web3.eth.Contract(icolaContractABI, icolaAddress);
-                const cap1 = new web3.eth.Contract(cap2ContractABI, cap2Address);
-                const cap2 = new web3.eth.Contract(cap2ContractABI, cap1Address);
+                const cap1 = new web3.eth.Contract(cap1ContractABI, cap1Address);
+                const cap2 = new web3.eth.Contract(cap2ContractABI, cap2Address);
                 const coin = new web3.eth.Contract(coinABI, bottleCoinAddress);
 
                 async function getProp() {
@@ -118,7 +118,7 @@
                         let owned = 0;
                         try {
                             owned = await nft.methods.balanceOf(accounts[0]).call();
-                            console.log('what is owned',owned);
+                            //console.log('what is owned',owned);
                         } catch(err) {
                             console.log('check approval 721 err',err);
                         }
