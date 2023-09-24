@@ -90,11 +90,11 @@
                 async function getProp() {
                     
                     saleOn = await bottle2.methods._saleOn().call();
-                    totalSup = await parseInt(bottle2.methods.totalSupply().call());
+                    totalSup = parseInt(await bottle2.methods.totalSupply().call());
                     raffleLive = await icola.methods.raffleOn().call();
-                    range = await parseInt(icola.methods.starter().call()); 
-                    count = await parseInt(cap2.methods.count().call());
-                    odds = await parseInt(icola.methods.odds().call());
+                    range = parseInt(await icola.methods.starter().call()); 
+                    count = parseInt(await cap2.methods.count().call());
+                    odds = parseInt(await icola.methods.odds().call());
                     mil = await icola.methods.checkMIL().call();
 
                     console.log(totalSup,"tokens")
