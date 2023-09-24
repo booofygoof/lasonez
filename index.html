@@ -243,14 +243,18 @@
                         alert('connect your wallet')
                         return
                     }
-                    if (!bottle1Approve) {
+                    if (holdings.bottle1 == 0 && holdings.bottle2 == 0 && holdings.bottle1coin == 0){
+                        alert('you literally dont have bottles in this wallet');
+                    } else {
+                        if (!bottle1Approve) {
                         hide("redeem-button")
                         show("approve1-button")
-                    }
-                    if (!bottle2Approve) {
-                        hide("redeem-button")
-                        show("approve2-button")
-                        return
+                        }
+                        if (!bottle2Approve) {
+                            hide("redeem-button")
+                            show("approve2-button")
+                            return
+                        }
                     }
                    
                    hide("redeem-button");
@@ -259,13 +263,12 @@
                    if (test) {
                    playerBottles = [304,305,306,307,308,309,310,311,312,313,314,315];
                    } else {
-                    playerBottles1 = await bottle1.methods.tokensOfOwner(accounts[0]).call();
-                    playerBottles2 = await bottle2.methods.tokensOfOwner(accounts[0]).call();
-                    
+                    playerBottles = await bottle1.methods.tokensOfOwner(accounts[0]).call();
+                    playerBottles += await bottle2.methods.tokensOfOwner(accounts[0]).call();
                    }
 
                    if (playerBottles == []){
-                    alert("hey you need to choose which bottles you want to burn")
+                    alert("hey you need to buy bottles to burn")
                    } else {
                    
                    var bottleList = document.getElementById("bottleList");
@@ -273,10 +276,10 @@
                    for (bot in playerBottles) {
                     if (i < 10) {
                         let li = document.createElement("li");
-                        li.appendChild(document.createTextNode(playerBottles1[bot]));
+                        li.appendChild(document.createTextNode(playerBottles[bot]));
                         li.setAttribute("class","bottle");
-                        li.setAttribute("onclick",`listEff(${playerBottles1[bot]})`);
-                        li.setAttribute("id",`bottle-${playerBottles1[bot]}`)
+                        li.setAttribute("onclick",`listEff(${playerBottles[bot]})`);
+                        li.setAttribute("id",`bottle-${playerBottles[bot]}`)
                         bottleList.appendChild(li);
                     i++
                     } else if (i == 10 ){
