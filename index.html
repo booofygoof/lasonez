@@ -100,7 +100,7 @@
                     console.log(totalSup,"tokens")
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
-                    document.getElementById("bottlesBurned").innerHTML=`Raffle is Live: ${raffleLive} ... Caps #${range} to ${range + odds} are eligible ....${count} out of ${odds} bottles burned`;
+                    document.getElementById("bottlesBurned").innerHTML=`Raffle is Live: ${raffleLive} ... Caps #${range} to ${range + odds} are eligible ....${count-484} out of ${odds} bottles burned`;
                 }
                 getProp();
                 //check friends
@@ -240,9 +240,13 @@
                         alert('connect your wallet')
                         return
                     }
+                    if (!bottle1Approve) {
+                        hide("redeem-button")
+                        show("approve1-button")
+                    }
                     if (!bottle2Approve) {
                         hide("redeem-button")
-                        show("approve-button")
+                        show("approve2-button")
                         return
                     }
                    
