@@ -88,7 +88,7 @@
 
                 async function getProp() {
                     
-                    saleOn=await bottle2.methods.s_saleIsActive().call();
+                    saleOn=await bottle2.methods._saleOn().call();
                     totalSup = await bottle2.methods.totalSupply().call();
                     raffleLive = await icola.methods.raffleOn().call();
                     range = await icola.methods.starter().call() 
@@ -633,13 +633,13 @@
                 
                 <ul>
                     <li>
-                        <button id="mint-button" onclick="phaseTwoMint()" disabled="true">MiladyCola</button>
+                        <button id="mint-button" onclick="phaseTwoMint()">Click For MiladyCola</button>
                         <input class="mint-input" id="mint-input"/>
                         <button id="mnt-btn" onclick="mint()">Mint Bottle(s)</button>
                         <button id="mnt2brn-btn" onclick="mint2burn()">Mint to Burn Bottle(s)</button>
                     </li>
                     <li>
-                        <button id="redeem-button" onclick="phaseTwoRedeem()" disabled="true">Redeem Cap</button>
+                        <button id="redeem-button" onclick="phaseTwoRedeem()">Redeem Cap</button>
                         <button id="approve1-button" onclick="setApprove1()">Approve Bottles</button>
                         <button id="approve2-button" onclick="setApprove2()">Approve Bottlesv2</button>
                         <div id="bottleList">

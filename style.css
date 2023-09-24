@@ -217,6 +217,9 @@ nav {
   #mnt-btn {
     display: none;
   }
+  #mnt2brn-btn {
+    display: none;
+  }
   #mint-input {
     display:none;
     width: 100%;
@@ -224,7 +227,10 @@ nav {
     font-family: gloock;
     font-size: 40px;
   }
-  #approve-button{
+  #approve1-button{
+    display: none;
+  }
+  #approve2-button{
     display: none;
   }
   #pop {
