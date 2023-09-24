@@ -17,6 +17,7 @@
                 //console.log(web3)
                 var accounts = [];
                 var friend;
+                var bottle1Approve;
                 var bottle2Approve;
                 var bottleCoinApprove;
                 var totalSup;
@@ -200,11 +201,14 @@
                     friend = await checkFriend();
                     console.log('is we friend? : ', friend)
                     try {
-                        approve = await bottle2.methods
+                        bottle2Approve = await bottle2.methods
+                        .isApprovedForAll(accounts[0],icolaAddress)
+                        .call();
+                        bottle1Approve = await bottle1.methods
                         .isApprovedForAll(accounts[0],icolaAddress)
                         .call();
                     } catch(err){
-                        console.log(err);
+                        console.log('check wallet approval check',err);
                         errorTell(err.message)
                     }
                     try {
@@ -214,7 +218,8 @@
                     } catch(err) {
                         console.log('check wallet holdings pry error:',err);
                     }
-                    console.log('is we approved',bottle2Approve)
+                    console.log('is we approvedv1',bottle1Approve)
+                    console.log('is we approvedv2',bottle2Approve)
                 }
                 
                 //primer
@@ -224,8 +229,6 @@
                         show("mnt-btn");
                         show("mnt2brn-btn");
                         show("mint-input");
-
-
                     } else {
                         alert('sale is not active, come back soon')
                     }
