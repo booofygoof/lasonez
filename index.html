@@ -262,8 +262,11 @@
                    if (test) {
                    playerBottles = [304,305,306,307,308,309,310,311,312,313,314,315];
                    } else {
-                    playerBottles = await bottle1.methods.tokensOfOwner(accounts[0]).call();
-                    playerBottles += await bottle2.methods.tokensOfOwner(accounts[0]).call();
+                    if (holdings.bottle2 > 0 && bottle2Approve){
+                        playerBottles = await bottle2.methods.tokensOfOwner(accounts[0]).call();
+                    } else if (holdings.bottle1 > 0 && bottle1Approve){
+                        playerBottles = await bottle1.methods.tokensOfOwner(accounts[0]).call();
+                    }
                    }
 
                    if (playerBottles == []){
