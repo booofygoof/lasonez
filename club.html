@@ -148,6 +148,7 @@
                     polishMint()
                     accountHash = web3.utils.soliditySha3(accounts[0]);
                     var proof = tree.getHexProof(accountHash);
+                    console.log('proof in mint func',proof);
                     amt = parseInt(document.getElementById("mint-input").value);
                     console.log(amt);
                     if(!accounts[0]){
