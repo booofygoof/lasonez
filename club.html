@@ -23,6 +23,7 @@
                 var raffleLive;
                 var mil;
                 var count;
+                var saleOn;
 
                 const sepMessAddress = "0x947326D1c1B273F45a5902564C9A6B4EF88FCd84";
 
@@ -39,8 +40,8 @@
                     mil = await club.methods.checkClubPrize().call();
                     count = parseInt(await club.methods.clubPops().call());
                     CA = await club.methods.clubPrizeCA().call();
+                    saleOn = raffleLive;
 
-                    console.log(totalSup,"tokens")
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
                     document.getElementById("bottlesBurned").innerHTML=`Raffle Entry is Open: ${raffleLive} ... Prize is ${mil} ${CA} ....${count} tries so far`;
