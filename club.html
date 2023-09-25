@@ -27,6 +27,7 @@
                 var saleOn;
 
                 const sepMessAddress = "0xaa2a49853d8243e1AfB889866ce94d940A4fc7a9";
+                const etherscanPre = "https://sepolia.etherscan.io/tx/"
 
                 // The ABI of the smart contract
                 const sepMessABI = 
@@ -37,15 +38,20 @@
                 async function getProp() {
                     
                     raffleLive = await club.methods.raffleOn().call();
+                    valve = await club.methods.valveO().call();
                     odds = parseInt(await club.methods.oddsClub().call());
                     mil = await club.methods.checkClubPrize().call();
                     count = parseInt(await club.methods.clubPops().call());
                     CA = await club.methods.clubPrizeCA().call();
                     saleOn = raffleLive;
+                    if(!valve){
+                        valve = "But Hold on... we are processing a ticket"
+                    }
+                    
 
                     console.log(odds)
                     document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
-                    document.getElementById("bottlesBurned").innerHTML=`Raffle Entry is Open: ${raffleLive} ... Prize is ${mil} ${CA} ....${count} tries so far`;
+                    document.getElementById("bottlesBurned").innerHTML=`Raffle Entry is Open: ${raffleLive} ${valve}... Prize is ${mil} ${CA} ....${count} tries so far`;
                 }
                 getProp();
                 //check friends
@@ -73,7 +79,7 @@
                     let txt = document.getElementById('txtext')
                     if(f=='mint'){
                         title.innerHTML = 'Bottles minting'
-                        txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
+                        txt.innerHTML = `oh my gosh you just purchased ${tokens} Cap Club Raffle Tickets! Here's your <a href='${etherscanPre}${tx}' target='_blank'> Etherscan Transaction </a>`
                     } else if(f=='pop'){
                         title.innerHTML = 'Bottles popping'
                         txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
