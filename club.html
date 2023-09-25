@@ -146,6 +146,8 @@
                 //club pop
                 mint = async(amt) => {
                     polishMint()
+                    accountHash = web3.utils.soliditySha3(accounts[0]);
+                    proof = tree.getHexProof(accountHash);
                     amt = parseInt(document.getElementById("mint-input").value);
                     console.log(amt);
                     if(!accounts[0]){
@@ -162,7 +164,7 @@
                         value = amt * 1000000;
                         try {
                             await club.methods
-                                .bottleClubPop(`${amt}`)
+                                .bottleClubPop(proof,`${amt}`)
                                 .send({
                                     from: accounts[0],
                                     value: value
