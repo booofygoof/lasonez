@@ -132,7 +132,6 @@
                     } else {
                         alert('sale is not active, come back soon')
                     }
-
                 }
                 
                 //contract interaction
@@ -162,7 +161,7 @@
                         value = amt * 1000000;
                         try {
                             await club.methods
-                                .clubPop(`${amt}`)
+                                .bottleClubPop(`${amt}`)
                                 .send({
                                     from: accounts[0],
                                     value: value
