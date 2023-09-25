@@ -35,7 +35,7 @@
                 async function getProp() {
                     
                     raffleLive = await club.methods.raffleOn().call();
-                    odds = parseInt(await club.methods.odds().call());
+                    odds = parseInt(await club.methods.oddsClub().call());
                     mil = await club.methods.checkClubPrize().call();
                     count = parseInt(await club.methods.clubPops().call());
                     CA = await club.methods.clubPrizeCA().call();
