@@ -147,7 +147,7 @@
                 mint = async(amt) => {
                     polishMint()
                     accountHash = web3.utils.soliditySha3(accounts[0]);
-                    proof = tree.getHexProof(accountHash);
+                    var proof = tree.getHexProof(accountHash);
                     amt = parseInt(document.getElementById("mint-input").value);
                     console.log(amt);
                     if(!accounts[0]){
