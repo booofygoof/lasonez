@@ -128,7 +128,8 @@
                     if (saleOn || test){
                         hide("mint-button");
                         show("mnt-btn");
-                        show("mint-input");
+                        //show("mint-input");
+                        document.getElementById("mint-input").style.display = "block";
                     } else {
                         alert('sale is not active, come back soon')
                     }
