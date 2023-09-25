@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Cap Club</title>
+        <link rel="shortcut icon" href="public/cola.gif" width=32px>
+        <link 
+            rel="stylesheet"
+            href="style.css"
+            >
+            <script src="https://unpkg.com/web3@1.8.2/dist/web3.min.js"></script>
+
+            <!-- bottle nft contract -->
+            <script>
+
+                const web3 = new Web3(Web3.givenProvider); 
+                //console.log(web3)
+                var accounts = [];
+                var friend;
+                var odds;
+                var tree;
+                var CA;
+                var raffleLive;
+                var mil;
+                var count;
+
+                const sepMessAddress = "0x947326D1c1B273F45a5902564C9A6B4EF88FCd84";
+
+                // The ABI of the smart contract
+                const sepMessABI = 
+                [{"inputs":[{"internalType":"address","name":"_ccrouter","type":"address"},{"internalType":"address","name":"_link","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"inputs":[{"internalType":"uint64","name":"destinationChainSelector","type":"uint64"}],"name":"DestinationChainNotWhitelisted","type":"error"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"FailedToWithdrawEth","type":"error"},{"inputs":[{"internalType":"string","name":"err","type":"string"}],"name":"IncorrectFee","type":"error"},{"inputs":[{"internalType":"address","name":"router","type":"address"}],"name":"InvalidRouter","type":"error"},{"inputs":[{"internalType":"string","name":"err","type":"string"}],"name":"MembersOnly","type":"error"},{"inputs":[{"internalType":"string","name":"err","type":"string"}],"name":"NoDice","type":"error"},{"inputs":[{"internalType":"uint256","name":"currentBalance","type":"uint256"},{"internalType":"uint256","name":"calculatedFees","type":"uint256"}],"name":"NotEnoughBalance","type":"error"},{"inputs":[],"name":"NothingToWithdraw","type":"error"},{"inputs":[{"internalType":"string","name":"err","type":"string"}],"name":"RaffleNotLive","type":"error"},{"inputs":[{"internalType":"address","name":"sender","type":"address"}],"name":"SenderNotWhitelisted","type":"error"},{"inputs":[{"internalType":"uint64","name":"sourceChainSelector","type":"uint64"}],"name":"SourceChainNotWhitelisted","type":"error"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"messageId","type":"bytes32"},{"indexed":true,"internalType":"uint64","name":"sourceChainSelector","type":"uint64"},{"indexed":false,"internalType":"address","name":"sender","type":"address"},{"indexed":false,"internalType":"string","name":"text","type":"string"}],"name":"MessageReceived","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"bytes32","name":"messageId","type":"bytes32"},{"indexed":true,"internalType":"uint64","name":"destinationChainSelector","type":"uint64"},{"indexed":false,"internalType":"address","name":"receiver","type":"address"},{"indexed":false,"internalType":"string","name":"text","type":"string"},{"indexed":false,"internalType":"address","name":"feeToken","type":"address"},{"indexed":false,"internalType":"uint256","name":"fees","type":"uint256"}],"name":"MessageSent","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferRequested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"playa","type":"address"}],"name":"clubWinner","type":"event"},{"inputs":[],"name":"acceptOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"atBat","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32[]","name":"proof","type":"bytes32[]"},{"internalType":"string","name":"numTickets","type":"string"}],"name":"bottleClubPop","outputs":[],"stateMutability":"payable","type":"function"},{"inputs":[{"internalType":"bytes","name":"data","type":"bytes"}],"name":"bytesToUint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"pure","type":"function"},{"inputs":[{"components":[{"internalType":"bytes32","name":"messageId","type":"bytes32"},{"internalType":"uint64","name":"sourceChainSelector","type":"uint64"},{"internalType":"bytes","name":"sender","type":"bytes"},{"internalType":"bytes","name":"data","type":"bytes"},{"components":[{"internalType":"address","name":"token","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"internalType":"struct Client.EVMTokenAmount[]","name":"destTokenAmounts","type":"tuple[]"}],"internalType":"struct Client.Any2EVMMessage","name":"message","type":"tuple"}],"name":"ccipReceive","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"checkCheckClubMember","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes32[]","name":"proof","type":"bytes32[]"}],"name":"checkClubMember","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"checkClubPrize","outputs":[{"internalType":"uint256","name":"clubPrize","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"clubPops","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"clubPrizeCA","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"clubTicketPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"PrizeCoinAddress","type":"address"},{"internalType":"uint256","name":"newClubPrice","type":"uint256"},{"internalType":"uint32","name":"newOdds","type":"uint32"},{"internalType":"bytes32","name":"newRoot","type":"bytes32"}],"name":"configureClubRaffle","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"str","type":"string"}],"name":"createBytes","outputs":[{"internalType":"bytes","name":"","type":"bytes"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"_sender","type":"address"}],"name":"denySender","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint64","name":"_destinationChainSelector","type":"uint64"}],"name":"denylistDestinationChain","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint64","name":"_sourceChainSelector","type":"uint64"}],"name":"denylistSourceChain","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getLastReceivedMessageDetails","outputs":[{"internalType":"bytes32","name":"messageId","type":"bytes32"},{"internalType":"string","name":"text","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getRouter","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"goSwitch","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"init","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"oddsClub","outputs":[{"internalType":"uint32","name":"","type":"uint32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"raffleOn","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"root","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"pure","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"valveO","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint64","name":"_destinationChainSelector","type":"uint64"}],"name":"whitelistDestinationChain","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_sender","type":"address"}],"name":"whitelistSender","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint64","name":"_sourceChainSelector","type":"uint64"}],"name":"whitelistSourceChain","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint64","name":"","type":"uint64"}],"name":"whitelistedDestinationChains","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"whitelistedSenders","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint64","name":"","type":"uint64"}],"name":"whitelistedSourceChains","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_beneficiary","type":"address"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawClubPrize","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_beneficiary","type":"address"},{"internalType":"address","name":"_token","type":"address"}],"name":"withdrawToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"stateMutability":"payable","type":"receive"}]
+
+                const club = new web3.eth.Contract(sepMessABI, sepMessAddress);
+                
+                async function getProp() {
+                    
+                    raffleLive = await club.methods.raffleOn().call();
+                    odds = parseInt(await club.methods.odds().call());
+                    mil = await club.methods.checkClubPrize().call();
+                    count = parseInt(await club.methods.clubPops().call());
+                    CA = await club.methods.clubPrizeCA().call();
+
+                    console.log(totalSup,"tokens")
+                    console.log(odds)
+                    document.getElementById("odds").innerHTML=`Odds are: 1/${odds}`
+                    document.getElementById("bottlesBurned").innerHTML=`Raffle Entry is Open: ${raffleLive} ... Prize is ${mil} ${CA} ....${count} tries so far`;
+                }
+                getProp();
+                //check friends
+                    
+                    checkFriend = async() => {
+                        accountHash = web3.utils.soliditySha3(accounts[0]);
+                        proof = tree.getHexProof(accountHash);
+                        return tree.verify(proof,accountHash,root);
+                    }
+                    //cosmetics
+                function errorTell(message) {
+                    alert(`Something went wrong, here is what the chain said when we checked: ${message}`);
+                }
+                function hide(id) {
+                    let el = document.getElementById(id);
+                    el.style.display = "none";
+                }
+                function show(id) {
+                    let el = document.getElementById(id);
+                    el.style.display = "block";
+                }
+                function popUp(f,tokens,tx){
+                    document.getElementById('txinfo').style.display = 'grid';
+                    let title = document.getElementById('txtitle')
+                    let txt = document.getElementById('txtext')
+                    if(f=='mint'){
+                        title.innerHTML = 'Bottles minting'
+                        txt.innerHTML = `oh my gosh you just minted ${tokens} MiladyCola Bottles! Here's your <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
+                    } else if(f=='pop'){
+                        title.innerHTML = 'Bottles popping'
+                        txt.innerHTML = `whoa you just popped off bottle ${tokens} lfg. If you won, the milady token will be sent to your wallet shortly. Otherwise, you can double check the vrf request by going to the icola contract. here's the <a href='${etherscanPre}/${tx}' target='_blank'> Etherscan Transaction </a>`
+                    }
+                }
+                function updatePop(f) {
+                    let title = document.getElementById('txtitle')
+                    if(f=='mint'){
+                        title.innerHTML = 'Tickets Purchased'
+                    } else if(f=='pop'){
+                        title.innerHTML = 'Bottles popped'
+                    }
+                }
+                function closePop() {
+                    document.getElementById('txinfo').style.display = 'none';
+                }
+                
+                // Connect to the MetaMask wallet
+                connectWallet = async() => {
+                    console.log('you clicked connect')
+                    let connected = false;
+                    try {
+                        accounts = await web3.eth.requestAccounts().then()
+                        connected = true;
+                    } catch(err) {
+                        errorTell(err.message);
+                    }   
+                    if(connected){
+                        var connectbutt = document.getElementById('connect-button');
+                        connectbutt.innerText = 'Connected';
+                        connectbutt.disabled = true;
+                        connectbutt.style.fontSize = "20px";
+
+                        var networkId = await web3.eth.net.getId();
+                        // console.log(networkId);
+                        if (networkId !== 11155111) {
+                        // Show an error message or take other appropriate action
+                        alert('change your network to main ethereum')
+                        }
+                        checkWallet();
+                    }
+                }
+                // See if qualify for discount AND if approveAll icola
+                checkWallet = async() => {
+                    console.log('whats in your wallet');
+                    test = false;
+                    friend = await checkFriend();
+                    console.log('is we friend? : ', friend)
+                }
+                
+                //primer
+                function phaseTwoMint() {
+                    if (saleOn || test){
+                        hide("mint-button");
+                        show("mnt-btn");
+                        show("mnt2brn-btn");
+                        show("mint-input");
+                    } else {
+                        alert('sale is not active, come back soon')
+                    }
+
+                }
+                
+                //contract interaction
+                //mint polisher
+                polishMint = () => {
+                    console.log('we mintin');
+                    document.getElementById("mint-button").style.display = "block";
+                    document.getElementById("mnt-btn").style.display = "none";
+                    document.getElementById("mint-input").style.display = "none";
+                }
+                //club pop
+                mint = async(amt) => {
+                    polishMint()
+                    amt = parseInt(document.getElementById("mint-input").value);
+                    console.log(amt);
+                    if(!accounts[0]){
+                        alert('connect your wallet')
+                    }
+                    if(amt > 300){
+                        alert('BTW This will not work, you can only buy 24 pack at a time')
+                    }
+                    var mintbutt = document.getElementById('mint-button');
+                        mintbutt.innerText = 'Minting';
+                        mintbutt.disabled = true;
+                        
+                    if (friend) {
+                        value = amt * 1000000;
+                        try {
+                            await club.methods
+                                .clubPop(`${amt}`)
+                                .send({
+                                    from: accounts[0],
+                                    value: value
+                                })
+                                .on('transactionHash', function(hash){
+                                        popUp('mint',amt,hash)
+                                });
+                        } catch (err) {
+                            errorTell(err.message);
+                        }
+                        mintbutt.innerText = 'Mint Bottles';
+                        mintbutt.disabled = false;
+                    } else {
+                        alert('no you arent a friend you cannot play');
+                    }
+                    
+                }
+                
+            
+            </script>
+            
+
+    </head>
+    <body>
+        <div class="help">
+            <div class="options">
+                <ul>
+                    <li>
+                        <div class="dropdown">
+                        About
+                            <div id="aboutdrop" class="dropitems">
+                                <p>MiladyCola is a raffle lottery NFT that you can burn for a chance to win 1 Milady!</p>
+                                <p>The MiladyCola bottles come in multiple flavors that nod to loveable milady derivatives</p>
+                                <p>When you drink/burn your bottle nft and redeem it for a cap nft, you are entering for a chance to be chosen by chainlink vrf to win the milady!</p>
+                                <p>It only takes 1 MiladyCola and a little bit of luck to WIN</p>
+                                <p>2/3 of the mint proceeds go towards sweeping MILx on NFTX for our winners, the rest goes to compensating the artist and developer</p>
+                                <p>The odds of winning will depend on how much MILx we can acquire with the mint proceeds. The purchase price of the mialdy determines each raffles' odds</p>
+                                <p>The wallet owning the winning cap will be able to claim 1.01 MILADY ERC20 for a random redeem from the NFTX vault!</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                        Contracts
+                            <div id="contractdrop" class="dropitems">
+                                <p>MiladyCola Bottle V1 NFT Contract <a target="_blank" href="https://etherscan.io/address/0xe0c839d60f15dd0b939e93d9eeab5ecda9affe57#code">view on etherscan</a></p>
+                                <p>MiladyCola Bottle V2 NFT Contract <a target="_blank" href="https://etherscan.io/address/0x63cec32f903d07d837e4247930309c9fc5480d18#code">view on etherscan</a></p>
+                                <p>MiladyCola Cap NFT Contract <a target="_blank" href="https://etherscan.io/address/0x0c3106c67bd3d8dc570147c509cf95474c1c9134#code">view on etherscan</a></p>
+                                <p>MiladyCola Raffle NFT Contract <a target="_blank" href="https://etherscan.io/address/0x275c0dc242dfbc7f425ea0e64ef4383252dcdce2#code">view on etherscan</a></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            Tutorial
+                                <div id="contractdrop" class="dropitems">
+                                    <p>First you need some bottles. Connect your wallet in the top right corner and use the miladycola button to open the bottle menu to decide how many bottles to mint.</p>
+                                    <p>You may mint caps directly by choosing the "mint to burn" option. It's as if you are purchasing a bottle and burning it in the same contract, this saves gas.</p>
+                                    <p>Next you will need to approve our raffle smart contract to burn your bottles (THEY WILL BE LOST FOREVER), click the redeem cap button to get to the approval transaction and double check the transaction that it only asks for your bottles</p>
+                                    <p>After you've approved your bottles, you are ready to pop em. click the redeem bottles button again and select which bottles you would like to redeem. </p>
+                                    <p>V2 Raffles are played within ranges. That means caps from previous ranges will no longer be considered.</p>
+                                </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            FAQ
+                            <div id="faqdrop" class="dropitems">
+                                <h3>How much are they?</h3>
+                                <p>.0125 a pop (.011 in batches greater than 10) or .01 for milady and friends (remilio,cigawrette,milady aura,miladystation)</p>
+                                <h3>How does it work</h3>
+                                <p>We are shifting gears and trying a new method. All those bottles popped get a second chance at the milady. We will let you know soon! Check miladycola twitter</p>
+                                <h3>Who made dis?</h3>
+                                <p>Bottles and cap art and concept created by AngelEyesCrypto, contracts and website by MiladyStation</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown close">
+                            x
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="connect">
+                <button id="connect-button" onclick="connectWallet()">Connect</button>
+            </div>
+        </div>
+        <div class="landing">
+        <div class="marquee">
+            <div class="marquee__content">
+                <h1 id="title">miladycola</h1>
+                <h1 id="title2">miladycola</h1>
+                <h1 id="title3">miladycola</h1>
+                <h1 id="title4">miladycola</h1>
+                <h1 id="title5">miladycola</h1>
+                <h1 id="title6">miladycola</h1>
+                <h1 id="title7">miladycola</h1>
+                <h1 id="title8">miladycola</h1>
+                <h1 id="title9">miladycola</h1>
+            </div>
+            <div aria-hidden="true" class="marquee__content">
+                <h1 id="title">miladycola</h1>
+                <h1 id="title2">miladycola</h1>
+                <h1 id="title3">miladycola</h1>
+                <h1 id="title4">miladycola</h1>
+                <h1 id="title5">miladycola</h1>
+                <h1 id="title6">miladycola</h1>
+                <h1 id="title7">miladycola</h1>
+                <h1 id="title8">miladycola</h1>
+                <h1 id="title9">miladycola</h1>
+            </div>
+        </div>
+        
+        <div class="progress-bar-container">
+            <div id="progress-bar"></div>
+            <div id="progress-text"></div>
+          </div>
+        
+            <div id="txinfo" class="popup">
+                <button id="popx" onclick="closePop()">X</button>
+                <div class="popupstuff">
+                    <h3 id="txtitle">tx title</h3>
+                    <p id="txtext">tx info blablablablablablablabalbla</p>
+                    <img src="public/sodapopinski.gif"/>
+                </div>
+            </div>
+            <nav>
+                
+                <ul>
+                    <li>
+                        <button id="mint-button" onclick="phaseTwoMint()">Click For Cap Club Raffle</button>
+                        <input class="mint-input" id="mint-input"/>
+                        <button id="mnt-btn" onclick="mint()">Club Raffle</button>
+                        
+                    </li>
+                    <li>            
+                        <audio controls autoplay loop>
+                            <source src="public/ColaSong.wav" type="audio/wav">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </li>
+                </ul>
+                <div class="oddinfo">
+                    <ul>
+                        <li>
+                            <h3 id="odds">Odds are:</h3>
+                        </li>
+                        <li>
+                            <h3 id="bottlesBurned">Bottles burned:</h3>
+                        </li>
+                            
+                    </ul>
+                    <h3 id="milady"></h3>
+                </div>
+                
+ 
+            </nav>
+        </div>
+        <footer>
+            <img src="public/sodapopinski.gif"/>
+            <img src="public/alottery.gif">
+            <img src="public/cola.gif"/>
+            <img src="public/lain-dancing.gif"/>
+            <img src="public/lain.gif"/>
+            <img src="public/soda-cow.gif"/>
+        </footer>
+                       <!-- merkle -->
+                       <script src="https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js"></script>
+                       <script>
+                           // miladystation holders (+ first 4 for testing )
+                           //first 3 wallets, forge test, forge anvil cast account 0, miladycola test wallet
+                           // const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4']
+                           //     .map(x => web3.utils.soliditySha3(x));
+                           const leaves = ['0x6A0a993cc824457734EC7Cac50744a34EcAf34D4','0x8703a1aC3a2474eE68A1154B7538172f9865192c','0xE51B692Ee9671E7EA69022D1C70bdCF16fff07c5','0xE220F9370Af26471Eba309975E827B66BaDbD4F5']
+                           .map( x => web3.utils.soliditySha3(x));
+                           // 0x7FA9385bE102ac3EAc297483Dd6233D62b3e1496
+                           
+                           tree = new MerkleTree(leaves, web3.utils.soliditySha3, { sort: true });
+                           const root = tree.getHexRoot();
+                           console.log('root:',root)
+                        //    function sharry(first,second) {
+                        //        return web3.utils.soliditySha3(web3.utils.encodePacked(first,second));
+                        //    }
+               
+                        //    function manualCheck(proof) {
+                        //        for(i = 0; i< proof.length; i++) {
+                        //            sharry
+                        //        }
+                        //    }
+       
+                        //    function proveAnyone(address) {
+                        //        var leaf = web3.utils.soliditySha3(address);
+                        //        var proof = tree.getHexProof(leaf);
+                        //        if (tree.verify(proof,leaf,root)){
+                        //            return tree.getHexProof(leaf);
+                        //        }
+                        //    }
+                           
+                       </script>
+    </body>
+                <!-- progress bar -->
+                <script>
+                        // function sleep(ms) {
+                        //     return new Promise((resolve) => {
+                        //     setTimeout(resolve, ms);
+                        //     });
+                        // }
+                        // sleep(10000);
+
+                        // // Get the total supply information from the contract
+                        // const totalSupply = 10000;
+                        // // Assume that you have a variable called "mintedCount" that tracks the number of tokens that have been minted so far
+                        // const mintedCount = totalSup;
+                        // //const mintedCount = 1000;
+                        
+                        // // Calculate the percentage of minting progress
+                        // const progressPercentage = (mintedCount / totalSupply) * 100;
+                        
+                        // // Update the progress bar width and text
+                        
+                        // document.getElementById("progress-bar").style.width = progressPercentage + "%";
+                        // document.getElementById("progress-text").innerHTML = progressPercentage.toFixed(2) + "% Minted";
+                        // console.log('were making a progress bar')
+                </script>
+
+                            <!-- mobile tapping -->
+            <script>
+                // Get all dropdown elements
+                var dropdowns = document.querySelectorAll('.dropdown');
+                // Loop through each dropdown element
+                for (var i = 0; i < dropdowns.length; i++) {
+                // Add a click event listener to toggle the display of the dropdown items
+                dropdowns[i].addEventListener('click', function() {
+                    
+                    let opens = document.querySelectorAll('.dropitemsee');
+                    
+                    for (let i = 0; i < opens.length; i++){
+                        // console.log(opens[i])
+                        opens[i].removeAttribute("class","dropitemsee");
+                        opens[i].setAttribute("class","dropitems")
+                    }
+
+                    let item = this.children[0];
+                    // console.dir(item.attributes[1].nodeValue)
+
+                    item.removeAttribute("class","dropitems");
+                    item.setAttribute("class","dropitemsee");
+                    
+
+                });
+                }
+
+
+                function dropdownDrop(id) {
+                    el = document.getElementById(id);
+                    el.removeAttribute("class","dropitems");
+                    el.setAttribute("class","dropitemsee");
+                }
+                function dropdownCatch(id) {
+                    el = document.getElementById(id);
+                    el.removeAttribute("class","dropitemsee");
+                    el.setAttribute("class","dropitems");
+                }
+            </script>
+</html>
